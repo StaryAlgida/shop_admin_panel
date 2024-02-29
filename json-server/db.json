@@ -56,7 +56,7 @@
       "sellerPhone": "+48 445 710 968",
       "canNegotiate": false,
       "createdOn": "2022-05-08T09:32:20.970Z",
-      "categoryId": 9
+      "categoryId": "9"
     },
     {
       "id": "1",
@@ -68,7 +68,7 @@
       "sellerPhone": "+48 707 481 970",
       "canNegotiate": true,
       "createdOn": "2022-05-07T22:35:08.870Z",
-      "categoryId": 3
+      "categoryId": "3"
     },
     {
       "id": "2",
@@ -80,7 +80,7 @@
       "sellerPhone": "+48 693 117 579",
       "canNegotiate": true,
       "createdOn": "2022-05-08T11:29:34.009Z",
-      "categoryId": 2
+      "categoryId": "2"
     },
     {
       "id": "3",
@@ -92,7 +92,7 @@
       "sellerPhone": "+48 784 042 252",
       "canNegotiate": true,
       "createdOn": "2022-05-08T15:38:38.891Z",
-      "categoryId": 4
+      "categoryId": "4"
     },
     {
       "id": "4",
@@ -104,7 +104,7 @@
       "sellerPhone": "+48 169 161 439",
       "canNegotiate": true,
       "createdOn": "2022-05-07T17:09:46.902Z",
-      "categoryId": 8
+      "categoryId": "8"
     },
     {
       "id": "5",
@@ -116,7 +116,7 @@
       "sellerPhone": "+48 787 869 792",
       "canNegotiate": false,
       "createdOn": "2022-05-07T17:41:59.967Z",
-      "categoryId": 7
+      "categoryId": "7"
     },
     {
       "id": "6",
@@ -128,7 +128,7 @@
       "sellerPhone": "+48 169 358 003",
       "canNegotiate": false,
       "createdOn": "2022-05-08T05:50:44.886Z",
-      "categoryId": 3
+      "categoryId": "3"
     },
     {
       "id": "7",
@@ -140,7 +140,7 @@
       "sellerPhone": "+48 584 048 300",
       "canNegotiate": false,
       "createdOn": "2022-05-08T05:29:30.384Z",
-      "categoryId": 6
+      "categoryId": "6"
     },
     {
       "id": "8",
@@ -152,7 +152,7 @@
       "sellerPhone": "+48 980 253 438",
       "canNegotiate": true,
       "createdOn": "2022-05-07T18:33:10.470Z",
-      "categoryId": 9
+      "categoryId": "9"
     },
     {
       "id": "9",
@@ -164,7 +164,7 @@
       "sellerPhone": "+48 357 958 960",
       "canNegotiate": false,
       "createdOn": "2022-05-08T06:02:04.322Z",
-      "categoryId": 4
+      "categoryId": "4"
     },
     {
       "id": "10",
@@ -176,14 +176,14 @@
       "sellerPhone": "+48 847 297 011",
       "canNegotiate": false,
       "createdOn": "2022-05-08T10:25:04.020Z",
-      "categoryId": 2
+      "categoryId": "2"
     },
     {
       "title": "Intelligent Steel Salad",
       "price": "642.00",
       "image": "http://placeimg.com/400/400/business?i=11",
       "canNegotiate": false,
-      "categoryId": 0,
+      "categoryId": "0",
       "sellerPhone": "+48 820 856 800",
       "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
       "seller": "Makayla",
@@ -200,7 +200,7 @@
       "sellerPhone": "+48 797 357 669",
       "canNegotiate": true,
       "createdOn": "2022-05-08T13:43:01.145Z",
-      "categoryId": 0
+      "categoryId": "0"
     },
     {
       "id": "13",
@@ -212,7 +212,7 @@
       "sellerPhone": "+48 685 588 835",
       "canNegotiate": true,
       "createdOn": "2022-05-08T07:43:11.074Z",
-      "categoryId": 2
+      "categoryId": "2"
     },
     {
       "id": "14",
@@ -224,7 +224,7 @@
       "sellerPhone": "+48 494 748 323",
       "canNegotiate": true,
       "createdOn": "2022-05-08T04:51:33.990Z",
-      "categoryId": 6
+      "categoryId": "6"
     },
     {
       "id": "15",
@@ -236,7 +236,7 @@
       "sellerPhone": "+48 459 735 097",
       "canNegotiate": true,
       "createdOn": "2022-05-08T10:10:25.442Z",
-      "categoryId": 9
+      "categoryId": "9"
     },
     {
       "id": "16",
@@ -248,7 +248,7 @@
       "sellerPhone": "+48 062 661 245",
       "canNegotiate": true,
       "createdOn": "2022-05-07T23:04:42.023Z",
-      "categoryId": 4
+      "categoryId": "4"
     },
     {
       "id": "17",
@@ -260,7 +260,7 @@
       "sellerPhone": "+48 700 290 447",
       "canNegotiate": true,
       "createdOn": "2022-05-08T06:05:17.550Z",
-      "categoryId": 2
+      "categoryId": "2"
     },
     {
       "id": "18",
@@ -272,7 +272,7 @@
       "sellerPhone": "+48 712 875 445",
       "canNegotiate": true,
       "createdOn": "2022-05-07T23:53:05.757Z",
-      "categoryId": 6
+      "categoryId": "6"
     },
     {
       "id": "19",
@@ -284,7 +284,7 @@
       "sellerPhone": "+48 194 239 072",
       "canNegotiate": true,
       "createdOn": "2022-05-08T03:36:20.866Z",
-      "categoryId": 8
+      "categoryId": "8"
     },
     {
       "id": "20",
@@ -296,7 +296,7 @@
       "sellerPhone": "+48 564 399 073",
       "canNegotiate": false,
       "createdOn": "2022-05-08T06:37:15.761Z",
-      "categoryId": 9
+      "categoryId": "9"
     },
     {
       "id": "21",
@@ -308,7 +308,7 @@
       "sellerPhone": "+48 516 242 397",
       "canNegotiate": false,
       "createdOn": "2022-05-08T02:09:39.387Z",
-      "categoryId": 9
+      "categoryId": "9"
     },
     {
       "id": "22",
@@ -320,7 +320,7 @@
       "sellerPhone": "+48 834 042 116",
       "canNegotiate": true,
       "createdOn": "2022-05-08T12:26:04.247Z",
-      "categoryId": 2
+      "categoryId": "2"
     },
     {
       "id": "23",
@@ -332,7 +332,7 @@
       "sellerPhone": "+48 558 410 815",
       "canNegotiate": false,
       "createdOn": "2022-05-07T17:58:50.563Z",
-      "categoryId": 3
+      "categoryId": "3"
     },
     {
       "id": "24",
@@ -344,7 +344,7 @@
       "sellerPhone": "+48 444 658 468",
       "canNegotiate": true,
       "createdOn": "2022-05-08T05:13:36.201Z",
-      "categoryId": 1
+      "categoryId": "1"
     },
     {
       "id": "25",
@@ -356,7 +356,7 @@
       "sellerPhone": "+48 057 776 634",
       "canNegotiate": false,
       "createdOn": "2022-05-08T11:43:38.966Z",
-      "categoryId": 4
+      "categoryId": "4"
     },
     {
       "id": "26",
@@ -368,7 +368,7 @@
       "sellerPhone": "+48 555 724 788",
       "canNegotiate": false,
       "createdOn": "2022-05-07T23:25:27.373Z",
-      "categoryId": 8
+      "categoryId": "8"
     },
     {
       "id": "27",
@@ -380,7 +380,7 @@
       "sellerPhone": "+48 590 117 863",
       "canNegotiate": false,
       "createdOn": "2022-05-08T15:35:27.020Z",
-      "categoryId": 2
+      "categoryId": "2"
     },
     {
       "id": "28",
@@ -392,7 +392,7 @@
       "sellerPhone": "+48 658 561 264",
       "canNegotiate": false,
       "createdOn": "2022-05-08T03:43:20.391Z",
-      "categoryId": 4
+      "categoryId": "4"
     },
     {
       "id": "29",
@@ -404,7 +404,7 @@
       "sellerPhone": "+48 906 383 525",
       "canNegotiate": true,
       "createdOn": "2022-05-07T23:40:38.826Z",
-      "categoryId": 5
+      "categoryId": "5"
     }
   ]
 }
