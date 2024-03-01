@@ -1,9 +1,10 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import Product from "../interfaces/prductInterface.ts";
+import {useToaster} from "./useToaster.tsx";
 
 
-export default function useGetAllData():[Product[], boolean] {
+export default function useGetAllData(): [Product[], boolean] {
     const [data, setData] = useState<Product[]>([{
         id: '0',
         title: 'No data',
@@ -17,6 +18,7 @@ export default function useGetAllData():[Product[], boolean] {
         categoryId: 'No data',
     }])
     const [loading, setLoading] = useState<boolean>(false)
+    const {show} = useToaster()
 
     useEffect(() => {
         const allOffers = async () => {
@@ -26,6 +28,7 @@ export default function useGetAllData():[Product[], boolean] {
                 setData([...response.data])
             } catch (error) {
                 if (axios.isAxiosError(error)) {
+                    show({title: error.code, description: error.message, bg: "danger"})
                     console.log(error)
                 }
             } finally {
@@ -33,7 +36,7 @@ export default function useGetAllData():[Product[], boolean] {
             }
         }
         void allOffers()
-    }, []);
+    }, [show]);
 
     return [data, loading]
 }

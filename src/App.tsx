@@ -1,6 +1,7 @@
 import './App.css'
 import Header from "./Header.tsx";
 import {Outlet} from "react-router-dom";
+import {ToasterProvider} from "./context/ToasterContext.tsx";
 
 function App() {
 
@@ -8,7 +9,9 @@ function App() {
         <>
             <Header/>
             <section className='container'>
-                <Outlet/>
+                <ToasterProvider delay={5000}>
+                    <Outlet/>
+                </ToasterProvider>
             </section>
         </>
     )

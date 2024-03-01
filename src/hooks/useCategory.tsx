@@ -16,7 +16,7 @@ export default function useCategory():[Category[], boolean] {
                 setData([...response.data])
             } catch (error) {
                 if (axios.isAxiosError(error)) {
-                    console.log(error)
+                    console.log('error')
                 }
             } finally {
                 setLoading(false)
