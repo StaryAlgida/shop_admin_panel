@@ -1,3 +1,12 @@
+interface Pagination {
+    first: number;
+    prev: number | null;
+    next: number | null;
+    last: number;
+    pages: number;
+    data: Product[]
+}
+
 interface Product {
     id: string;
     title: string;
@@ -11,4 +20,4 @@ interface Product {
     categoryId: string;
 }
 
-export default Product
+export type {Product, Pagination}
