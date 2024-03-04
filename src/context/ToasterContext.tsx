@@ -41,5 +41,3 @@ export const ToasterProvider = ({children, delay = 3000}: { children: ReactNode,
         </ToasterContext.Provider>
     )
 }
-
-//className="position-absolute top-100 start-100"

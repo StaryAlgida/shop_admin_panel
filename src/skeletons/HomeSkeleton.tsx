@@ -19,6 +19,9 @@ export default function HomeSkeleton() {
                 <Placeholder as="td" animation="glow">
                     <Placeholder xs={6}/>
                 </Placeholder>
+                <Placeholder as="td" animation="glow">
+                    <Placeholder xs={6}/>
+                </Placeholder>
             </tr>
             <tr>
                 <Placeholder as="td" animation="glow">
@@ -36,6 +39,9 @@ export default function HomeSkeleton() {
                 <Placeholder as="td" animation="glow">
                     <Placeholder xs={4}/>
                 </Placeholder>
+                <Placeholder as="td" animation="glow">
+                    <Placeholder xs={6}/>
+                </Placeholder>
             </tr>
             <tr>
                 <Placeholder as="td" animation="glow">
@@ -52,6 +58,9 @@ export default function HomeSkeleton() {
                 </Placeholder>
                 <Placeholder as="td" animation="glow">
                     <Placeholder xs={7}/>
+                </Placeholder>
+                <Placeholder as="td" animation="glow">
+                    <Placeholder xs={6}/>
                 </Placeholder>
             </tr>
         </>

@@ -52,12 +52,17 @@ export default function Advert() {
         }
         void getData()
     }, [advertId, show]);
-    // TODO: Add loading
-    // TODO: Add Edit and Delete buttons
+
     return (
         <>
             {isLoading ? "Loading" :
-                <Container className='mt-5'>
+                <Container className='mt-2'>
+                    <Row className="mb-3">
+                        <Col>
+                            <Button variant="success" className="me-2">Edit</Button>
+                            <Button variant="danger">Delete</Button>
+                        </Col>
+                    </Row>
                     <Row>
                         <Col lg={6}>
                             <OfferSideCarousel/>
@@ -94,7 +99,7 @@ export default function Advert() {
                             </div>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row className="mb-5">
                         <h5 className='mt-3'>Description</h5>
                         <span>{data.description}</span>
                     </Row>
