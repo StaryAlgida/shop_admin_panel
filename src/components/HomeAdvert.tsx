@@ -1,5 +1,6 @@
 import {Product} from "../interfaces/prductInterface.ts";
 import Category from "../interfaces/categoryInterface.ts";
+import {LinkContainer} from "react-router-bootstrap";
 
 export default function HomeAdvert({data, categories}: {
     data: Product,
@@ -11,6 +12,7 @@ export default function HomeAdvert({data, categories}: {
     }
 
     return (
+        <LinkContainer to={`/advert/${data.id}`}>
         <tr>
             <td>{data.id}</td>
             <td>{data.seller}</td>
@@ -19,5 +21,6 @@ export default function HomeAdvert({data, categories}: {
             <td>{data.createdOn === "No data" ? "No data" : formatData(data.createdOn)}</td>
             <td>{categories.find((category) => category.id === data.categoryId)?.title || data.categoryId}</td>
         </tr>
+        </LinkContainer>
     )
 }

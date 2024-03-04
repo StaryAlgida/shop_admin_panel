@@ -7,6 +7,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useContext, useEffect} from "react";
 import {PaginationContext} from "./context/PaginationContext.tsx";
 import {useToaster} from "./hooks/useToaster.tsx";
+import PaginationContainer from "./pagination/PaginationContainer.tsx";
 
 export default function Home() {
     const [data, isLoading] = useGetAllData()
@@ -59,6 +60,7 @@ export default function Home() {
                 }
                 </tbody>
             </Table>
+            <PaginationContainer/>
         </>
     )
 }

@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import axios from "axios";
 import Home from "./Home.tsx";
+import Advert from "./Advert.tsx";
 
 axios.defaults.baseURL = "http://127.0.0.1:3200";
 
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
             {
                 path: "/:category",
                 element: <Home/>,
+            },
+            {
+                path:"/advert/:advertId",
+                element: <Advert/>
             }
         ]
     }])
