@@ -11,16 +11,20 @@ export default function HomeAdvert({data, categories}: {
         return inputDate.toTimeString().slice(0, 8) + " " + inputDate.toISOString().slice(0, 10);
     }
 
+    const checkNull = (data: string | null): string => {
+        return data ? data : "No data"
+    }
+
     return (
         <LinkContainer to={`/advert/${data.id}`}>
-        <tr>
-            <td>{data.id}</td>
-            <td>{data.seller}</td>
-            <td>{data.title}</td>
-            <td>{data.price}</td>
-            <td>{data.createdOn === "No data" ? "No data" : formatData(data.createdOn)}</td>
-            <td>{categories.find((category) => category.id === data.categoryId)?.title || data.categoryId}</td>
-        </tr>
+            <tr className={data.id ? "cursor-pointer" : "cursor-not-allowed"}>
+                <td>{checkNull(data.id)}</td>
+                <td>{checkNull(data.seller)}</td>
+                <td>{checkNull(data.title)}</td>
+                <td>{checkNull(data.price)}</td>
+                <td>{data.createdOn ? formatData(data.createdOn) : "No data"}</td>
+                <td>{categories.find((category) => category.id === data.categoryId)?.title || data.categoryId}</td>
+            </tr>
         </LinkContainer>
     )
 }

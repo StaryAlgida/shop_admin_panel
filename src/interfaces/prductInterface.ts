@@ -8,16 +8,16 @@ interface Pagination {
 }
 
 interface Product {
-    id: string;
-    title: string;
-    price: string;
-    description: string;
-    seller: string;
-    image: string;
-    sellerPhone: string;
-    canNegotiate: boolean;
-    createdOn: string;
-    categoryId: string;
+    id: string | null;
+    title: string | null;
+    price: string | null;
+    description: string | null;
+    seller: string | null;
+    image: string | null;
+    sellerPhone: string | null;
+    canNegotiate: boolean | null;
+    createdOn: string | null;
+    categoryId: string | null;
 }
 
 export type {Product, Pagination}

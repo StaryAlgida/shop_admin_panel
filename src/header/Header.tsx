@@ -17,7 +17,7 @@ export default function Header() {
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container>
                 <LinkContainer to="/">
-                    <Navbar.Brand onClick={reset} className="cursor-pointer">Admin panel</Navbar.Brand>
+                    <Navbar.Brand onClick={reset}>Admin panel</Navbar.Brand>
                 </LinkContainer>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse id="basic-navbar-nav">

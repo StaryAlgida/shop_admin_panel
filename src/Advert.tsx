@@ -1,25 +1,28 @@
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {ReactNode, useEffect, useState} from "react";
 import axios from "axios";
 import {Product} from "./interfaces/prductInterface.ts";
 import {useToaster} from "./hooks/useToaster.tsx";
 import {Button, Col, Container, OverlayTrigger, Row, Tooltip} from "react-bootstrap";
 import OfferSideCarousel from "./components/OfferSideCarousel.tsx";
+import DeleteModal from "./components/DeleteModal.tsx";
 
 
 const Link = ({id, children, title}: { id: string, children: ReactNode, title: string }) => (
     <OverlayTrigger overlay={<Tooltip id={id}>{title}</Tooltip>}>
-        <a href="#">{children}</a>
+        <a>{children}</a>
     </OverlayTrigger>
 );
 
 export default function Advert() {
     const {show} = useToaster()
+    const nav = useNavigate()
     const {advertId} = useParams()
     const [isLoading, setIsLoading] = useState(false)
+    const [showModal, setShowModal] = useState(false);
     const [data, setData] = useState<Product>({
-        id: 'No data',
-        title: 'No data',
+        id: null,
+        title: null,
         price: 'No data',
         description: 'No data',
         seller: 'No data',
@@ -29,12 +32,29 @@ export default function Advert() {
         createdOn: 'No data',
         categoryId: 'No data',
     })
+
+    const handleCloseModal = () => setShowModal(false)
+    const handleOpenModal = () => setShowModal(true)
+
+    const handleDelete = async (id: string) => {
+        try {
+            const response = await axios.delete(`/adverts/${id}`)
+            console.log(response)
+            show({title: `Success`, description: `Item with id ${id} deleted successfully!`, bg: "success"})
+            handleCloseModal()
+            nav('/')
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                show({title: `Error ${error.code}`, description: error.message, bg: "danger"})
+            }
+        }
+    }
+
     useEffect(() => {
         const getData = async () => {
             try {
                 setIsLoading(true)
                 const response = await axios.get(`/adverts?id=${advertId}`)
-                console.log(response.data)
                 if (response.data.length > 0) {
                     setData({...response.data[0]})
                 } else {
@@ -44,7 +64,6 @@ export default function Advert() {
             } catch (error) {
                 if (axios.isAxiosError(error)) {
                     show({title: error.code, description: error.message, bg: "danger"})
-                    console.log("error")
                 }
             } finally {
                 setIsLoading(false)
@@ -57,12 +76,18 @@ export default function Advert() {
         <>
             {isLoading ? "Loading" :
                 <Container className='mt-2'>
-                    <Row className="mb-3">
-                        <Col>
-                            <Button variant="success" className="me-2">Edit</Button>
-                            <Button variant="danger">Delete</Button>
-                        </Col>
-                    </Row>
+                    {data.title && data.id ?
+                        <Row className="mb-3">
+                            <DeleteModal showModal={showModal}
+                                         handleCloseModal={handleCloseModal}
+                                         handleDelete={handleDelete}
+                                         item={{title: data.title, id: data.id}}/>
+                            <Col>
+                                <Button variant="success" className="me-2">Edit</Button>
+                                <Button variant="danger" onClick={handleOpenModal}>Delete</Button>
+                            </Col>
+                        </Row>
+                        : ''}
                     <Row>
                         <Col lg={6}>
                             <OfferSideCarousel/>

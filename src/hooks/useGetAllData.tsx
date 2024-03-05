@@ -8,16 +8,16 @@ import {PaginationContext} from "../context/PaginationContext.tsx";
 export default function useGetAllData(): [Product[], boolean, boolean] {
     const defaultData = useMemo<Product[]>(() => ([
             {
-                id: '0',
-                title: 'No data',
-                price: 'No data',
-                description: 'No data',
-                seller: 'No data',
-                image: 'No data',
-                sellerPhone: 'No data',
-                canNegotiate: false,
-                createdOn: 'No data',
-                categoryId: 'No data',
+                id: null,
+                title: null,
+                price: null,
+                description: null,
+                seller: null,
+                image: null,
+                sellerPhone: null,
+                canNegotiate: null,
+                createdOn: null,
+                categoryId: null,
             }]
     ), [])
     const [data, setData] = useState<Product[]>([...defaultData])
