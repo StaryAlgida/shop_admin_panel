@@ -7,6 +7,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import axios from "axios";
 import Home from "./Home.tsx";
 import Advert from "./Advert.tsx";
+import Edit from "./editComponents/Edit.tsx";
 
 axios.defaults.baseURL = "http://127.0.0.1:3200";
 
@@ -24,8 +25,12 @@ const router = createBrowserRouter([
                 element: <Home/>,
             },
             {
-                path:"/advert/:advertId",
-                element: <Advert/>
+                path: "/advert/:advertId",
+                element: <Advert/>,
+            },
+            {
+                path: "/advert/:advertId/edit",
+                element: <Edit/>,
             }
         ]
     }])

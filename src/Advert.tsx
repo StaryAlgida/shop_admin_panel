@@ -1,11 +1,11 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {ReactNode, useEffect, useState} from "react";
+import {ReactNode, useState} from "react";
 import axios from "axios";
-import {Product} from "./interfaces/prductInterface.ts";
 import {useToaster} from "./hooks/useToaster.tsx";
 import {Button, Col, Container, OverlayTrigger, Row, Tooltip} from "react-bootstrap";
 import OfferSideCarousel from "./components/OfferSideCarousel.tsx";
 import DeleteModal from "./components/DeleteModal.tsx";
+import useSingleAdvert from "./hooks/useSingleAdvert.tsx";
 
 
 const Link = ({id, children, title}: { id: string, children: ReactNode, title: string }) => (
@@ -18,20 +18,8 @@ export default function Advert() {
     const {show} = useToaster()
     const nav = useNavigate()
     const {advertId} = useParams()
-    const [isLoading, setIsLoading] = useState(false)
+
     const [showModal, setShowModal] = useState(false);
-    const [data, setData] = useState<Product>({
-        id: null,
-        title: null,
-        price: 'No data',
-        description: 'No data',
-        seller: 'No data',
-        image: 'No data',
-        sellerPhone: 'No data',
-        canNegotiate: false,
-        createdOn: 'No data',
-        categoryId: 'No data',
-    })
 
     const handleCloseModal = () => setShowModal(false)
     const handleOpenModal = () => setShowModal(true)
@@ -50,27 +38,7 @@ export default function Advert() {
         }
     }
 
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                setIsLoading(true)
-                const response = await axios.get(`/adverts?id=${advertId}`)
-                if (response.data.length > 0) {
-                    setData({...response.data[0]})
-                } else {
-                    show({title: "404", description: `Advert with id:${advertId} not found.`, bg: "danger"})
-                }
-
-            } catch (error) {
-                if (axios.isAxiosError(error)) {
-                    show({title: error.code, description: error.message, bg: "danger"})
-                }
-            } finally {
-                setIsLoading(false)
-            }
-        }
-        void getData()
-    }, [advertId, show]);
+    const [data, isLoading] = useSingleAdvert(advertId)
 
     return (
         <>
@@ -83,7 +51,8 @@ export default function Advert() {
                                          handleDelete={handleDelete}
                                          item={{title: data.title, id: data.id}}/>
                             <Col>
-                                <Button variant="success" className="me-2">Edit</Button>
+                                <Button variant="success" onClick={() => nav(`/advert/${advertId}/edit`)}
+                                        className="me-2">Edit</Button>
                                 <Button variant="danger" onClick={handleOpenModal}>Delete</Button>
                             </Col>
                         </Row>
