@@ -18,6 +18,7 @@ interface Product {
     canNegotiate: boolean | null;
     createdOn: string | null;
     categoryId: string | null;
+    [key: string]: string | boolean | null;
 }
 
 export type {Product, Pagination}
