@@ -6,6 +6,7 @@ import {Button, Col, Container, OverlayTrigger, Row, Tooltip} from "react-bootst
 import OfferSideCarousel from "./components/OfferSideCarousel.tsx";
 import DeleteModal from "./components/DeleteModal.tsx";
 import useSingleAdvert from "./hooks/useSingleAdvert.tsx";
+import {LinkContainer} from "react-router-bootstrap";
 
 
 const Link = ({id, children, title}: { id: string, children: ReactNode, title: string }) => (
@@ -51,8 +52,9 @@ export default function Advert() {
                                          handleDelete={handleDelete}
                                          item={{title: data.title, id: data.id}}/>
                             <Col>
-                                <Button variant="success" onClick={() => nav(`/advert/${advertId}/edit`)}
-                                        className="me-2">Edit</Button>
+                                <LinkContainer to={`/advert/${advertId}/edit`}>
+                                    <Button variant="success" className="me-2">Edit</Button>
+                                </LinkContainer>
                                 <Button variant="danger" onClick={handleOpenModal}>Delete</Button>
                             </Col>
                         </Row>

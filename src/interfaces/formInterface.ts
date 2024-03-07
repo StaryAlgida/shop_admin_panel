@@ -1,91 +1,112 @@
 interface FormState {
     title: {
         value: string;
-        correct: null | boolean;
+        correct: boolean;
+        message: string;
     };
     price: {
         value: string;
-        correct: null | boolean;
+        correct: boolean;
+        message: string;
     };
     description: {
         value: string;
-        correct: null | boolean;
+        correct: boolean;
+        message: string;
     };
     image: {
         value: string;
-        correct: null | boolean;
+        correct: boolean;
+        message: string;
     };
     sellerPhone: {
         value: string;
-        correct: null | boolean;
+        correct: boolean;
+        message: string;
     };
     canNegotiate: {
         value: string;
-        correct: null | boolean;
+        correct: boolean;
+        message: string;
     };
     categoryId: {
         value: string;
-        correct: null | boolean;
+        correct: boolean;
+        message: string;
     };
     id: {
         value: string;
-        correct: null | boolean;
+        correct: boolean;
+        message: string;
     };
     seller: {
         value: string;
-        correct: null | boolean;
+        correct: boolean;
+        message: string;
     };
     createdOn: {
         value: string;
-        correct: null | boolean;
+        correct: boolean;
+        message: string;
     };
 
     [key: string]: {
         value: string;
-        correct: null | boolean;
+        correct: boolean;
+        message: string;
     };
 }
 
 export const defaultData: FormState = {
     title: {
         value: '',
-        correct: null,
+        correct: false,
+        message: '',
     },
     price: {
         value: '',
-        correct: null,
+        correct: false,
+        message: '',
     },
     description: {
         value: '',
-        correct: null,
+        correct: false,
+        message: '',
     },
     image: {
         value: '',
-        correct: null,
+        correct: false,
+        message: '',
     },
     sellerPhone: {
         value: '',
-        correct: null,
+        correct: false,
+        message: '',
     },
     canNegotiate: {
         value: '',
-        correct: null,
+        correct: false,
+        message: '',
     },
     categoryId: {
         value: '',
-        correct: null,
+        correct: false,
+        message: '',
     },
     id: {
         value: '',
-        correct: null,
+        correct: false,
+        message: '',
     },
     seller: {
         value: '',
-        correct: null,
+        correct: false,
+        message: '',
     },
     createdOn: {
         value: '',
-        correct: null,
+        correct: false,
+        message: '',
     },
 }
 export default FormState

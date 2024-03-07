@@ -8,7 +8,7 @@ export default function useSingleAdvert(advertId: string | undefined):[Product, 
     const [data, setData] = useState<Product>({
         id: null,
         title: null,
-        price: null,
+        price: '0',
         description: null,
         seller: null,
         image: null,
@@ -42,6 +42,5 @@ export default function useSingleAdvert(advertId: string | undefined):[Product, 
         }
         void getData()
     }, [advertId, show]);
-
     return [data, loading, error]
 }

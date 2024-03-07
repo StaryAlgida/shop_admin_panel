@@ -34,6 +34,7 @@ const router = createBrowserRouter([
             }
         ]
     }])
+// TODO: Add error path
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
