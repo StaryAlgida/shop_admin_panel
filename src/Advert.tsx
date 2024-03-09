@@ -4,7 +4,7 @@ import axios from "axios";
 import {useToaster} from "./hooks/useToaster.tsx";
 import {Button, Col, Container, OverlayTrigger, Row, Tooltip} from "react-bootstrap";
 import OfferSideCarousel from "./components/OfferSideCarousel.tsx";
-import DeleteModal from "./components/DeleteModal.tsx";
+import ModalComponent from "./components/ModalComponent.tsx";
 import useSingleAdvert from "./hooks/useSingleAdvert.tsx";
 import {LinkContainer} from "react-router-bootstrap";
 
@@ -47,10 +47,12 @@ export default function Advert() {
                 <Container className='mt-2'>
                     {data.title && data.id ?
                         <Row className="mb-3">
-                            <DeleteModal showModal={showModal}
-                                         handleCloseModal={handleCloseModal}
-                                         handleDelete={handleDelete}
-                                         item={{title: data.title, id: data.id}}/>
+                            <ModalComponent showModal={showModal}
+                                            handleCloseModal={handleCloseModal}
+                                            handleAction={handleDelete}
+                                            item={{title: data.title, id: data.id}}
+                                            infoText={{title:"Delete", description:"Are you sure you want to delete "}}
+                            />
                             <Col>
                                 <LinkContainer to={`/advert/${advertId}/edit`}>
                                     <Button variant="success" className="me-2">Edit</Button>

@@ -657,6 +657,18 @@
       "canNegotiate": true,
       "createdOn": "2022-05-28T18:15:35.789Z",
       "categoryId": "1"
+    },
+    {
+      "id": "51",
+      "title": "Elegant Crystal Wine Glasses edited",
+      "price": "99.99",
+      "description": "Set of four crystal wine glasses, perfect for entertaining guestsawdawd",
+      "seller": "Elizabeth",
+      "image": "http://placeimg.com/400/400/business?i=50",
+      "sellerPhone": "+48 906 383 546",
+      "canNegotiate": true,
+      "createdOn": "2024-03-09T23:31:46.213Z",
+      "categoryId": "8"
     }
   ]
 }
