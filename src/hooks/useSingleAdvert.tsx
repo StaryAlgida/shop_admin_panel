@@ -28,11 +28,13 @@ export default function useSingleAdvert(advertId: string | undefined):[Product, 
                 if (response.data.length > 0) {
                     setData({...response.data[0]})
                 } else {
+                    setError(true)
                     show({title: "404", description: `Advert with id:${advertId} not found.`, bg: "danger"})
                 }
 
             } catch (error) {
                 if (axios.isAxiosError(error)) {
+                    console.log(error)
                     show({title: error.code, description: error.message, bg: "danger"})
                     setError(true)
                 }
