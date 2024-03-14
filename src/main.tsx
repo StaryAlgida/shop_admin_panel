@@ -8,6 +8,7 @@ import axios from "axios";
 import Home from "./Home.tsx";
 import Advert from "./Advert.tsx";
 import Edit from "./editComponents/Edit.tsx";
+import ErrorPage from "./components/ErrorPage.tsx";
 
 axios.defaults.baseURL = "http://127.0.0.1:3200";
 
@@ -31,10 +32,13 @@ const router = createBrowserRouter([
             {
                 path: "/advert/:advertId/edit",
                 element: <Edit/>,
+            },
+            {
+                path: "*",
+                element: <ErrorPage/>
             }
         ]
     }])
-// TODO: Add error path
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
