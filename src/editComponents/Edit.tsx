@@ -9,6 +9,7 @@ import ModalComponent from "../components/ModalComponent.tsx";
 import {Product} from "../interfaces/prductInterface.ts";
 import {useToaster} from "../hooks/useToaster.tsx";
 import axios from "axios";
+import DisableFrom from "./DisableFrom.tsx";
 
 export default function Edit() {
     const {advertId} = useParams()
@@ -64,115 +65,113 @@ export default function Edit() {
                 })
             }
         } catch
-            (error)
-            {
-                if (axios.isAxiosError(error)) {
-                    show({title: `${error.status}`, description: error.message, bg: "danger"})
+            (error) {
+            if (axios.isAxiosError(error)) {
+                show({title: `${error.status}`, description: error.message, bg: "danger"})
+            }
+        }
+        setShowModal(false)
+    }
+
+    useEffect(() => {
+        const setUpForm = () => {
+            const copy = {...defaultData}
+            for (const key in copy) {
+                if (Object.prototype.hasOwnProperty.call(data, key)) {
+
+                    copy[key].value = `${data[key]}`
+                    copy[key].correct = true
+                    copy[key].message = "Looks good"
                 }
             }
-            setShowModal(false)
+            setFormData({...copy})
+        }
+        setUpForm()
+        // console.log(data)
+    }, [data]);
+
+    const validateData = (value: string, field: string): [boolean, string] => {
+        const phoneRegex = /^\+\d{2}(?: \d{3}){3}$/
+        const priceRegex = /\.\d{1,2}$/
+        const negotiatedArray = ["true", "false"]
+
+
+        if (!value.length) {
+            return [false, "This field is required"]
         }
 
-        useEffect(() => {
-            const setUpForm = () => {
-                const copy = {...defaultData}
-                for (const key in copy) {
-                    if (Object.prototype.hasOwnProperty.call(data, key)) {
-
-                        copy[key].value = `${data[key]}`
-                        copy[key].correct = true
-                        copy[key].message = "Looks good"
-                    }
+        console.log(typeof value)
+        switch (field) {
+            case "title":
+                if (value.length < 5) {
+                    return [false, "Title is too short"]
                 }
-                setFormData({...copy})
-            }
-            setUpForm()
-            // console.log(data)
-        }, [data]);
-
-        const validateData = (value: string, field: string): [boolean, string] => {
-            const phoneRegex = /^\+\d{2}(?: \d{3}){3}$/
-            const priceRegex = /\.\d{1,2}$/
-            const negotiatedArray = ["true", "false"]
-
-
-            if (!value.length) {
-                return [false, "This field is required"]
-            }
-
-            console.log(typeof value)
-            switch (field) {
-                case "title":
-                    if (value.length < 5) {
-                        return [false, "Title is too short"]
-                    }
-                    if (value.length > 100) {
-                        return [false, "Title is too long"]
-                    }
-                    break;
-                case "sellerPhone":
-                    if (!phoneRegex.test(value)) {
-                        return [false, "Wrong phone number format. Should by +48111222333 or +48 111 222 333"]
-                    }
-                    break
-                case "price":
-                    if (isNaN(parseFloat(value))) {
-                        return [false, "Wrong price"]
-                    }
-                    if (parseFloat(value) <= 0) {
-                        return [false, "Price is too low"]
-                    }
-                    if (!priceRegex.test(value)) {
-                        return [false, "Bad price format. Correct is 0.00"]
-                    }
-                    break
-                case "image":
-                    console.log('title')
-                    break
-                case "canNegotiate":
-                    if (!negotiatedArray.includes(value)) {
-                        return [false, "Wrong choice. Choose between true or false"]
-                    }
-                    break
-                case "categoryId":
-                    if (!parseInt(value) || parseInt(value) > 9 || parseInt(value) < 0 || value === '') {
-                        return [false, "Wrong choice"]
-                    }
-                    break
-                case "description":
-                    if (value.length < 10) {
-                        return [false, "Description is too short"]
-                    }
-                    break
-                default:
-                    return [false, 'Error. You done something odd.']
-            }
-
-            return [true, "Looks good!"]
+                if (value.length > 100) {
+                    return [false, "Title is too long"]
+                }
+                break;
+            case "sellerPhone":
+                if (!phoneRegex.test(value)) {
+                    return [false, "Wrong phone number format. Should by +48111222333 or +48 111 222 333"]
+                }
+                break
+            case "price":
+                if (isNaN(parseFloat(value))) {
+                    return [false, "Wrong price"]
+                }
+                if (parseFloat(value) <= 0) {
+                    return [false, "Price is too low"]
+                }
+                if (!priceRegex.test(value)) {
+                    return [false, "Bad price format. Correct is 0.00"]
+                }
+                break
+            case "image":
+                console.log('title')
+                break
+            case "canNegotiate":
+                if (!negotiatedArray.includes(value)) {
+                    return [false, "Wrong choice. Choose between true or false"]
+                }
+                break
+            case "categoryId":
+                if (isNaN(parseInt(value)) || parseInt(value) > 9 || parseInt(value) < 0 || value === '') {
+                    return [false, "Wrong choice"]
+                }
+                break
+            case "description":
+                if (value.length < 10) {
+                    return [false, "Description is too short"]
+                }
+                break
+            default:
+                return [false, 'Error. You done something odd.']
         }
 
-        const handleOnChange = (value: string, field: string) => {
-            const copy: FormState = {...formData}
-            const [status, message] = validateData(value, field)
+        return [true, "Looks good!"]
+    }
 
-            if (status !== null) {
-                copy[field].value = value
-                copy[field].correct = status
-                copy[field].message = message
+    const handleOnChange = (value: string, field: string) => {
+        const copy: FormState = {...formData}
+        const [status, message] = validateData(value, field)
 
-                setFormData({...copy})
-            } else {
-                console.log(`Error ${message}: ${field}`)
-            }
-            if (!validated) {
-                setValidated(true)
-            }
+        if (status !== null) {
+            copy[field].value = value
+            copy[field].correct = status
+            copy[field].message = message
+
+            setFormData({...copy})
+        } else {
+            console.log(`Error ${message}: ${field}`)
         }
-
-        return (
-            <>
-                {isLoadingAdverts || isLoadingCategory ? <EditFormSkeleton/> :
-
+        if (!validated) {
+            setValidated(true)
+        }
+    }
+    return (
+        <>
+            {isLoadingAdverts || isLoadingCategory ? <EditFormSkeleton/> :
+                isAdvertError || isCategoryError ? <DisableFrom/> :
                     <Form noValidate
                           validated={validated}
                           onSubmit={handleOpenModal}
@@ -307,11 +306,9 @@ export default function Edit() {
                                                 }}
                                 />
                             </>
-
                         }
                     </Form>
-                }
-
-            </>
-        )
-    }
+            }
+        </>
+    )
+}
