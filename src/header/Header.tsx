@@ -25,6 +25,9 @@ export default function Header() {
                         <LinkContainer to="/">
                             <Nav.Link onClick={reset}>Home</Nav.Link>
                         </LinkContainer>
+                        <LinkContainer to={"/adverts"}>
+                            <Nav.Link>Adverts</Nav.Link>
+                        </LinkContainer>
                         <NavDropdown title="Categories" id="basic-nav-dropdown">
                             {isLoading ? <CategoriesSkeleton/> :
                                 isError ? <NavDropdown.Item>No Data</NavDropdown.Item> :

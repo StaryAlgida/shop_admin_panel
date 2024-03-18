@@ -9,7 +9,7 @@ import {PaginationContext} from "./context/PaginationContext.tsx";
 import {useToaster} from "./hooks/useToaster.tsx";
 import PaginationContainer from "./pagination/PaginationContainer.tsx";
 
-export default function Home() {
+export default function Adverts() {
     const [data, isLoading] = useGetAllData()
     const [categories, isLoadingCategories] = useCategory()
 

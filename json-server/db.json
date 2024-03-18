@@ -670,5 +670,57 @@
       "createdOn": "2024-03-11T07:16:59.934Z",
       "categoryId": "5"
     }
+  ],
+  "stats": [
+    {
+      "id": "0",
+      "categoryId": "0",
+      "count": 2
+    },
+    {
+      "id": "1",
+      "categoryId": "1",
+      "count": 6
+    },
+    {
+      "id": "2",
+      "categoryId": "2",
+      "count": 11
+    },
+    {
+      "id": "3",
+      "categoryId": "3",
+      "count": 6
+    },
+    {
+      "id": "4",
+      "categoryId": "4",
+      "count": 7
+    },
+    {
+      "id": "5",
+      "categoryId": "5",
+      "count": 3
+    },
+    {
+      "id": "6",
+      "categoryId": "6",
+      "count": 5
+    },
+    {
+      "id": "7",
+      "categoryId": "7",
+      "count": 4
+    },
+    {
+      "id": "8",
+      "categoryId": "8",
+      "count": 3
+    },
+    {
+      "id": "9",
+      "categoryId": "9",
+      "count": 5
+    }
   ]
 }
