@@ -27,7 +27,7 @@ export default function useDashboardTableData(): [Product[], boolean, boolean] {
         const dashboardOffers = async () => {
             try {
                 setLoading(true)
-                const response = await axios.get(`/adverts?_start=46&_limit=5`)
+                const response = await axios.get(`/adverts?_start=45&_limit=7`)
                 if (response.data.length === 0) {
                     show({title: "No data", description: "Can't find data", bg: "danger"})
                 } else {

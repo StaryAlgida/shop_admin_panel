@@ -1,17 +1,17 @@
-import useGetAllData from "./hooks/useGetAllData.tsx";
-import HomeAdvert from "./components/HomeAdvert.tsx";
+import useGetAllData from "../hooks/useGetAllData.tsx";
+import AdvertsTableItem from "./AdvertsTableItem.tsx";
 import {Table} from "react-bootstrap";
-import useCategory from "./hooks/useCategory.tsx";
-import HomeSkeleton from "./skeletons/HomeSkeleton.tsx";
+import useCategory from "../hooks/useCategory.tsx";
 import {useNavigate, useParams} from "react-router-dom";
 import {useContext, useEffect} from "react";
-import {PaginationContext} from "./context/PaginationContext.tsx";
-import {useToaster} from "./hooks/useToaster.tsx";
-import PaginationContainer from "./pagination/PaginationContainer.tsx";
+import {PaginationContext} from "../context/PaginationContext.tsx";
+import {useToaster} from "../hooks/useToaster.tsx";
+import PaginationContainer from "../pagination/PaginationContainer.tsx";
+import AdvertsLoadingError from "./advertsLoadingError/AdvertsLoadingError.tsx";
 
-export default function Adverts() {
-    const [data, isLoading] = useGetAllData()
-    const [categories, isLoadingCategories] = useCategory()
+export default function AdvertsTable() {
+    const [data, isLoading, isError] = useGetAllData()
+    const [categories, isLoadingCategories, isCategoryError] = useCategory()
 
     const {category} = useParams()
 
@@ -53,10 +53,11 @@ export default function Adverts() {
                 </thead>
                 <tbody>
                 {
-                    isLoading && isLoadingCategories ? <HomeSkeleton/> :
-                        data.map(item => (
-                            <HomeAdvert key={item.id} data={item} categories={categories}/>
-                        ))
+                    isLoading || isLoadingCategories ? <AdvertsLoadingError isLoading={true}/> :
+                        isCategoryError || isError || data === undefined ? <AdvertsLoadingError isError={true}/> :
+                            data.map(item => (
+                                <AdvertsTableItem key={item.id} data={item} categories={categories}/>
+                            ))
                 }
                 </tbody>
             </Table>

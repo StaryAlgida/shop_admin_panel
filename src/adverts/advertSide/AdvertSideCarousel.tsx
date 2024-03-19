@@ -1,6 +1,6 @@
 import {Carousel, Image} from "react-bootstrap";
 
-export default function OfferSideCarousel() {
+export default function AdvertSideCarousel() {
     return (
         <Carousel>
             <Carousel.Item interval={1000}>

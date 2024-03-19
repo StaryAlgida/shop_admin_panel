@@ -296,14 +296,16 @@ export default function Edit() {
                             <Button disabled type="submit">Submit form</Button> :
                             <>
                                 <Button type="submit">Submit form</Button>
-                                <ModalComponent showModal={showModal}
-                                                handleCloseModal={handleCloseModal}
-                                                handleAction={handleEdit}
-                                                item={{title: `${data.title}`, id: `${data.id}`}}
-                                                infoText={{
-                                                    title: "Edit",
-                                                    description: "Are you sure you want to edit "
-                                                }}
+                                <ModalComponent
+                                    showModal={showModal}
+                                    handleCloseModal={handleCloseModal}
+                                    handleAction={handleEdit}
+                                    item={{
+                                        itemId: `${data.id}`,
+                                        itemTitle: `${data.title}`,
+                                        infoTitle: "Edit",
+                                        infoDescription: "Are you sure you want to edit"
+                                    }}
                                 />
                             </>
                         }

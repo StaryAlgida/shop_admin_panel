@@ -1,6 +1,8 @@
 import {Col, Spinner, Table} from "react-bootstrap";
+import {FC} from "react";
+import {StatesProps} from "../../interfaces/dashboardPropsInterfaces.ts";
 
-export default function DashboardLoading() {
+const DashboardLoadingError: FC<StatesProps> = ({isLoading = false, isError = false}) => {
     return (
         <>
             <Col xs={12} lg={6}>
@@ -16,14 +18,20 @@ export default function DashboardLoading() {
                     </thead>
                     <tbody>
                     <tr>
-                        <td colSpan={5} className='text-center'><Spinner animation="border" /></td>
+                        <td colSpan={5} className='text-center cursor-not-allowed'>
+                            {isLoading && <Spinner animation="border"/>}
+                            {isError && "No data"}
+                        </td>
                     </tr>
                     </tbody>
                 </Table>
             </Col>
             <Col xs={12} lg={6} className='text-center'>
-                <Spinner animation="border"/>
+                {isLoading && <Spinner animation="border"/>}
+                {isError && "No data"}
             </Col>
         </>
     )
 }
+
+export default DashboardLoadingError

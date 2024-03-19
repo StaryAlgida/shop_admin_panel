@@ -8,7 +8,7 @@ import {
     YAxis
 } from "recharts";
 import {FC} from "react";
-import {DashboardChartProps} from "../interfaces/propsInterfaces.ts";
+import {DashboardChartProps} from "../../interfaces/dashboardPropsInterfaces.ts";
 
 const DashboardChart: FC<DashboardChartProps> = ({data, categories}) => {
     const prepareData = () => {
@@ -35,13 +35,12 @@ const DashboardChart: FC<DashboardChartProps> = ({data, categories}) => {
     return (
         <>
             <ResponsiveContainer width="100%" height="100%">
-                <BarChart width={150} height={40} data={prepareData()}>
+                <BarChart data={prepareData()}>
                     <Tooltip/>
                     <Bar dataKey="count" fill="#8884d8"/>
                     <CartesianGrid stroke="#ccc" strokeDasharray="5 5"/>
                     <XAxis dataKey="categoryId"/>
                     <YAxis/>
-
                 </BarChart>
             </ResponsiveContainer>
         </>

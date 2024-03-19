@@ -12,4 +12,9 @@ interface DashboardTableProps{
     categories: Category[]
 }
 
-export type {DashboardChartProps, DashboardTableProps}
+interface StatesProps{
+    isLoading?: boolean,
+    isError?: boolean,
+}
+
+export type {DashboardChartProps, DashboardTableProps, StatesProps}

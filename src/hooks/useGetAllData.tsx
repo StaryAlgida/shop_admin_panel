@@ -1,26 +1,12 @@
-import {useContext, useEffect, useMemo, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {Product} from "../interfaces/prductInterface.ts";
 import {useToaster} from "./useToaster.tsx";
 import {PaginationContext} from "../context/PaginationContext.tsx";
 
 
-export default function useGetAllData(): [Product[], boolean, boolean] {
-    const defaultData = useMemo<Product[]>(() => ([
-            {
-                id: null,
-                title: null,
-                price: null,
-                description: null,
-                seller: null,
-                image: null,
-                sellerPhone: null,
-                canNegotiate: null,
-                createdOn: null,
-                categoryId: null,
-            }]
-    ), [])
-    const [data, setData] = useState<Product[]>([...defaultData])
+export default function useGetAllData(): [Product[] | undefined, boolean, boolean] {
+    const [data, setData] = useState<Product[] | undefined>()
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState<boolean>(false)
     const {show} = useToaster()
@@ -39,7 +25,6 @@ export default function useGetAllData(): [Product[], boolean, boolean] {
                 }
             } catch (error) {
                 if (axios.isAxiosError(error)) {
-                    setData([...defaultData])
                     show({title: error.code, description: error.message, bg: "danger"})
                     setError(true)
                 }
@@ -48,7 +33,7 @@ export default function useGetAllData(): [Product[], boolean, boolean] {
             }
         }
         void allOffers()
-    }, [show, currentPage, categoryId, defaultData, update]);
+    }, [show, currentPage, categoryId, update]);
 
     return [data, loading, error]
 }

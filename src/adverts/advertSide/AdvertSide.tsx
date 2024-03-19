@@ -1,11 +1,11 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {ReactNode, useState} from "react";
 import axios from "axios";
-import {useToaster} from "./hooks/useToaster.tsx";
+import {useToaster} from "../../hooks/useToaster.tsx";
 import {Button, Col, Container, OverlayTrigger, Row, Tooltip} from "react-bootstrap";
-import OfferSideCarousel from "./components/OfferSideCarousel.tsx";
-import ModalComponent from "./components/ModalComponent.tsx";
-import useSingleAdvert from "./hooks/useSingleAdvert.tsx";
+import AdvertSideCarousel from "./AdvertSideCarousel.tsx";
+import ModalComponent from "../../components/ModalComponent.tsx";
+import useSingleAdvert from "../../hooks/useSingleAdvert.tsx";
 import {LinkContainer} from "react-router-bootstrap";
 
 
@@ -15,7 +15,7 @@ const Link = ({id, children, title}: { id: string, children: ReactNode, title: s
     </OverlayTrigger>
 );
 
-export default function Advert() {
+export default function AdvertSide() {
     const {show} = useToaster()
     const nav = useNavigate()
     const {advertId} = useParams()
@@ -47,14 +47,19 @@ export default function Advert() {
                 <Container className='mt-2'>
                     {data.title && data.id ?
                         <Row className="mb-3">
-                            <ModalComponent showModal={showModal}
-                                            handleCloseModal={handleCloseModal}
-                                            handleAction={handleDelete}
-                                            item={{title: data.title, id: data.id}}
-                                            infoText={{title:"Delete", description:"Are you sure you want to delete "}}
+                            <ModalComponent
+                                showModal={showModal}
+                                handleCloseModal={handleCloseModal}
+                                handleAction={handleDelete}
+                                item={{
+                                    itemId: data.id,
+                                    itemTitle: data.title,
+                                    infoTitle: "Delete",
+                                    infoDescription: "Are you sure you want to delete "
+                                }}
                             />
                             <Col>
-                                <LinkContainer to={`/advert/${advertId}/edit`}>
+                                <LinkContainer to={`/adverts/${advertId}/edit`}>
                                     <Button variant="success" className="me-2">Edit</Button>
                                 </LinkContainer>
                                 <Button variant="danger" onClick={handleOpenModal}>Delete</Button>
@@ -63,7 +68,7 @@ export default function Advert() {
                         : ''}
                     <Row>
                         <Col lg={6}>
-                            <OfferSideCarousel/>
+                            <AdvertSideCarousel/>
                         </Col>
                         <Col lg={6} className='mt-3'>
                             <h1>{data.title}</h1>

@@ -1,15 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import './index.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import axios from "axios";
-import Adverts from "./Adverts.tsx";
-import Advert from "./Advert.tsx";
+import AdvertsTable from "./adverts/AdvertsTable.tsx";
+import AdvertSide from "./adverts/advertSide/AdvertSide.tsx";
 import Edit from "./editComponents/Edit.tsx";
 import ErrorPage from "./components/ErrorPage.tsx";
-import Dashboard from "./Dashboard.tsx";
+import Dashboard from "./dashboard/Dashboard.tsx";
 
 axios.defaults.baseURL = "http://127.0.0.1:3200";
 
@@ -24,14 +24,14 @@ const router = createBrowserRouter([
             },
             {
                 path: "/adverts",
-                element: <Adverts/>,
+                element: <AdvertsTable/>,
             },
             {
-                path: "/advert/:advertId",
-                element: <Advert/>,
+                path: "/adverts/:advertId",
+                element: <AdvertSide/>,
             },
             {
-                path: "/advert/:advertId/edit",
+                path: "/adverts/:advertId/edit",
                 element: <Edit/>,
             },
             {

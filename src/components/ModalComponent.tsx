@@ -1,16 +1,14 @@
 import {Button, Modal} from "react-bootstrap";
 
-export default function ModalComponent({showModal, handleCloseModal, handleAction, item, infoText}: {
+export default function ModalComponent({showModal, handleCloseModal, handleAction, item}: {
     showModal: boolean,
     handleCloseModal: () => void,
     handleAction: (id: string) => void,
     item: {
-        title: string,
-        id: string
-    },
-    infoText:{
-        title:string
-        description: string
+        itemId: string,
+        itemTitle: string,
+        infoTitle: string,
+        infoDescription: string
     }
 }) {
 
@@ -23,16 +21,16 @@ export default function ModalComponent({showModal, handleCloseModal, handleActio
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>{infoText.title}</Modal.Title>
+                    <Modal.Title>{item.infoTitle}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {infoText.description} <b>{item.title}</b>?
+                    {item.infoDescription} <b>{item.itemTitle}</b>?
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="danger" onClick={handleCloseModal}>
                         No
                     </Button>
-                    <Button variant="success" onClick={() => handleAction(item.id)}>Yes</Button>
+                    <Button variant="success" onClick={() => handleAction(item.itemId)}>Yes</Button>
                 </Modal.Footer>
             </Modal>
         </>
