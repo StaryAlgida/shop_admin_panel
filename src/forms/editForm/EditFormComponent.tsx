@@ -1,7 +1,7 @@
 import {useParams} from "react-router-dom";
 import useSingleAdvert from "../../hooks/useSingleAdvert.tsx";
 import useCategory from "../../hooks/useCategory.tsx";
-import {Button, Col, Form, Row} from "react-bootstrap";
+import {Button, Form, Row} from "react-bootstrap";
 import React, {useEffect, useState} from "react";
 import FormState, {defaultData} from "../../interfaces/formInterface.ts";
 import EditFormSkeleton from "./skeleton/EditFormSkeleton.tsx";
@@ -10,7 +10,9 @@ import {Product} from "../../interfaces/prductInterface.ts";
 import {useToaster} from "../../hooks/useToaster.tsx";
 import axios from "axios";
 import DisableFrom from "./DisableFrom.tsx";
-import InputComponent from "./components/InputComponent.tsx";
+import InputComponent from "../components/InputComponent.tsx";
+import SelectComponent from "../components/SelectComponent.tsx";
+import TextareaComponent from "../components/TextareaComponent.tsx";
 
 export default function EditFormComponent() {
     const {advertId} = useParams()
@@ -209,7 +211,7 @@ export default function EditFormComponent() {
                                         name: "price",
                                         type: "number",
                                         placeholder: "0.00",
-                                        step:"0.01"
+                                        step: "0.01"
                                     }
                                 }
                             />
@@ -239,69 +241,66 @@ export default function EditFormComponent() {
                                     message: formData.image.message
                                 }}
                                 handleOnChange={handleOnChange}
-                                inputConfig={
-                                    {
-                                        sizeOfField: 6,
-                                        title: "Image",
-                                        name: "image",
-                                        type: "text",
-                                        placeholder: "Image URL",
-                                    }
-                                }
+                                inputConfig={{
+                                    sizeOfField: 6,
+                                    title: "Image",
+                                    name: "image",
+                                    type: "text",
+                                    placeholder: "Image URL",
+                                }}
                             />
-                            <Form.Group as={Col} md="3" controlId="validationCustom04">
-                                <Form.Label>Can by negotiate</Form.Label>
-                                <Form.Select
-                                    // type="text"
-                                    name="canNegotiate"
-                                    value={formData.canNegotiate.value}
-                                    isInvalid={!formData.canNegotiate.correct}
-                                    onChange={(e) => handleOnChange(e.currentTarget.value, e.currentTarget.name)}
-                                    required
-                                >
-                                    <option>Yes/No</option>
-                                    <option value={'true'}>Yes</option>
-                                    <option value={'false'}>No</option>
-                                </Form.Select>
-                                <Form.Control.Feedback
-                                    type={formData.canNegotiate.correct ? "valid" : "invalid"}>{formData.canNegotiate.message}</Form.Control.Feedback>
-                            </Form.Group>
-
-                            <Form.Group as={Col} md="3" controlId="validationCustom05">
-                                <Form.Label>Category</Form.Label>
-                                <Form.Select
-                                    name="categoryId"
-                                    value={formData.categoryId.value}
-                                    isInvalid={!formData.categoryId.correct}
-                                    onChange={(e) => handleOnChange(e.currentTarget.value, e.currentTarget.name)}
-                                    required
-                                >
-                                    <option>Category</option>
-                                    {categories.map(category => (
-                                        <option key={category.id} value={category.id}>{category.title}</option>
-                                    ))}
-                                </Form.Select>
-                                <Form.Control.Feedback type={formData.categoryId.correct ? "valid" : "invalid"}>
-                                    {formData.categoryId.message}
-                                </Form.Control.Feedback>
-                            </Form.Group>
+                            <SelectComponent
+                                formData={{
+                                    value: formData.canNegotiate.value,
+                                    correct: formData.canNegotiate.correct,
+                                    message: formData.canNegotiate.message
+                                }}
+                                handleOnChange={handleOnChange}
+                                inputConfig={{
+                                    sizeOfField: 3,
+                                    title: "Can by negotiate",
+                                    name: "canNegotiate"
+                                }}
+                                data={[
+                                    {text: "Yes/No", value: ''},
+                                    {text: "Yes", value: "true"},
+                                    {text: "No", value: "false"}
+                                ]}
+                            />
+                            <SelectComponent
+                                formData={{
+                                    value: formData.categoryId.value,
+                                    correct: formData.categoryId.correct,
+                                    message: formData.categoryId.message
+                                }}
+                                handleOnChange={handleOnChange}
+                                inputConfig={{
+                                    sizeOfField: 3,
+                                    title: "Category",
+                                    name: "categoryId"
+                                }}
+                                data={[
+                                    {text: "Select category", value: ''},
+                                    ...categories.map((category) => (
+                                        {text: category.title, value: category.id}))
+                                ]}
+                            />
                         </Row>
                         <Row>
-                            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                                <Form.Label>Description</Form.Label>
-                                <Form.Control
-                                    required
-                                    name="description"
-                                    value={formData.description.value}
-                                    isInvalid={!formData.description.correct}
-                                    onChange={(e) => handleOnChange(e.currentTarget.value, e.currentTarget.name)}
-                                    as="textarea"
-                                    rows={3}
-                                />
-                                <Form.Control.Feedback type={formData.description.correct ? "valid" : "invalid"}>
-                                    {formData.description.message}
-                                </Form.Control.Feedback>
-                            </Form.Group>
+                            <TextareaComponent
+                                formData={{
+                                    value: formData.description.value,
+                                    correct: formData.description.correct,
+                                    message: formData.description.message
+                                }}
+                                handleOnChange={handleOnChange}
+                                inputConfig={{
+                                    title: "Description",
+                                    name: "description",
+                                    placeholder: "Your description",
+                                    rows: 3,
+                                }}
+                            />
                         </Row>
                         {isAdvertError || isCategoryError ?
                             <Button disabled type="submit">Submit form</Button> :

@@ -23,17 +23,18 @@ const InputComponent: FC<InputComponentProps> = ({formData, handleOnChange, inpu
         <Form.Group as={Col} md={`${inputConfig.sizeOfField}`} controlId={`validation${inputConfig.name}`}>
             <Form.Label>{inputConfig.title}</Form.Label>
             <Form.Control
-                // required
                 type={inputConfig.type}
                 step={inputConfig.step}
                 name={inputConfig.name}
                 placeholder={inputConfig.placeholder}
                 value={formData.value}
                 isInvalid={!formData.correct}
+                // readOnly={!formData.correct}
                 onChange={(e) => handleOnChange(e.currentTarget.value, e.currentTarget.name)}
             />
             <Form.Control.Feedback
-                type={formData.correct ? "valid" : "invalid"}>{formData.message}</Form.Control.Feedback>
+                type={formData.correct ? "valid" : "invalid"}>{formData.message}
+            </Form.Control.Feedback>
         </Form.Group>
     )
 }
