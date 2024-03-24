@@ -3,7 +3,7 @@ import {ReactNode, useState} from "react";
 import axios from "axios";
 import {useToaster} from "../../hooks/useToaster.tsx";
 import {Button, Col, Container, OverlayTrigger, Row, Tooltip} from "react-bootstrap";
-import AdvertSideCarousel from "./AdvertSideCarousel.tsx";
+import AdvertCarousel from "./components/AdvertCarousel.tsx";
 import ModalComponent from "../../components/ModalComponent.tsx";
 import useSingleAdvert from "../../hooks/useSingleAdvert.tsx";
 import {LinkContainer} from "react-router-bootstrap";
@@ -68,7 +68,7 @@ export default function AdvertSide() {
                         : ''}
                     <Row>
                         <Col lg={6}>
-                            <AdvertSideCarousel/>
+                            <AdvertCarousel/>
                         </Col>
                         <Col lg={6} className='mt-3'>
                             <h1>{data.title}</h1>
@@ -93,7 +93,7 @@ export default function AdvertSide() {
                             </div>
                             <div className='d-flex flex-column'>
                                 <span className='fs-2'>Seller: {data.seller}</span>
-                                <Button className='mt-3' variant="primary">Buy</Button>
+                                <Button className='mt-3' variant="primary" disabled>Buy</Button>
                             </div>
                             <div className='d-flex justify-content-between mt-3'>
                                 <p>Phone: <span className='fw-bold'>{data.sellerPhone}</span></p>
@@ -108,7 +108,6 @@ export default function AdvertSide() {
                     </Row>
                 </Container>
             }
-
         </>
     )
 }

@@ -7,7 +7,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import axios from "axios";
 import AdvertsTable from "./adverts/AdvertsTable.tsx";
 import AdvertSide from "./adverts/advertSide/AdvertSide.tsx";
-import Edit from "./editComponents/Edit.tsx";
+import EditFormComponent from "./forms/editForm/EditFormComponent.tsx";
 import ErrorPage from "./components/ErrorPage.tsx";
 import Dashboard from "./dashboard/Dashboard.tsx";
 
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/adverts/:advertId/edit",
-                element: <Edit/>,
+                element: <EditFormComponent/>,
             },
             {
                 path: "*",

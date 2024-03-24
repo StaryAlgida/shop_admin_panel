@@ -1,17 +1,18 @@
 import {useParams} from "react-router-dom";
-import useSingleAdvert from "../hooks/useSingleAdvert.tsx";
-import useCategory from "../hooks/useCategory.tsx";
-import {Button, Col, Form, InputGroup, Row} from "react-bootstrap";
+import useSingleAdvert from "../../hooks/useSingleAdvert.tsx";
+import useCategory from "../../hooks/useCategory.tsx";
+import {Button, Col, Form, Row} from "react-bootstrap";
 import React, {useEffect, useState} from "react";
-import FormState, {defaultData} from "../interfaces/formInterface.ts";
-import EditFormSkeleton from "../skeletons/EditFormSkeleton.tsx";
-import ModalComponent from "../components/ModalComponent.tsx";
-import {Product} from "../interfaces/prductInterface.ts";
-import {useToaster} from "../hooks/useToaster.tsx";
+import FormState, {defaultData} from "../../interfaces/formInterface.ts";
+import EditFormSkeleton from "./skeleton/EditFormSkeleton.tsx";
+import ModalComponent from "../../components/ModalComponent.tsx";
+import {Product} from "../../interfaces/prductInterface.ts";
+import {useToaster} from "../../hooks/useToaster.tsx";
 import axios from "axios";
 import DisableFrom from "./DisableFrom.tsx";
+import InputComponent from "./components/InputComponent.tsx";
 
-export default function Edit() {
+export default function EditFormComponent() {
     const {advertId} = useParams()
     const [data, isLoadingAdverts, isAdvertError] = useSingleAdvert(advertId)
     const [categories, isLoadingCategory, isCategoryError] = useCategory()
@@ -177,70 +178,77 @@ export default function Edit() {
                           onSubmit={handleOpenModal}
                     >
                         <Row className="mb-3">
-                            <Form.Group as={Col} md="6" controlId="validationCustom01">
-                                <Form.Label>Title</Form.Label>
-                                <InputGroup hasValidation>
-                                    <Form.Control
-                                        required
-                                        type="text"
-                                        name="title"
-                                        placeholder="Product title"
-                                        value={formData.title.value}
-                                        isInvalid={!formData.title.correct}
-                                        onChange={(e) => handleOnChange(e.currentTarget.value, e.currentTarget.name)}
-                                    />
-                                    <Form.Control.Feedback
-                                        type={formData.title.correct ? "valid" : "invalid"}>{formData.title.message}</Form.Control.Feedback>
-                                </InputGroup>
-                            </Form.Group>
-                            <Form.Group as={Col} md="3" controlId="validationCustom02">
-                                <Form.Label>Price</Form.Label>
-                                <Form.Control
-                                    required
-                                    type="number"
-                                    step="0.01"
-                                    name="price"
-                                    placeholder="0.00"
-                                    value={formData.price.value}
-                                    isInvalid={!formData.price.correct}
-                                    onChange={(e) => handleOnChange(e.currentTarget.value, e.currentTarget.name)}
-                                />
-                                <Form.Control.Feedback
-                                    type={formData.price.correct ? "valid" : "invalid"}>{formData.price.message}</Form.Control.Feedback>
-                            </Form.Group>
-                            <Form.Group as={Col} md="3" controlId="validationCustom03">
-                                <Form.Label>Seller Phone</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    name="sellerPhone"
-                                    placeholder="+48 333 222 111"
-                                    value={formData.sellerPhone.value}
-                                    onChange={(e) => handleOnChange(e.currentTarget.value, e.currentTarget.name)}
-                                    isInvalid={!formData.sellerPhone.correct}
-                                    required/>
-                                <Form.Control.Feedback
-                                    type={formData.sellerPhone.correct ? "valid" : "invalid"}>{formData.sellerPhone.message}</Form.Control.Feedback>
-                            </Form.Group>
+                            <InputComponent
+                                formData={{
+                                    value: formData.title.value,
+                                    correct: formData.title.correct,
+                                    message: formData.title.message
+                                }}
+                                handleOnChange={handleOnChange}
+                                inputConfig={
+                                    {
+                                        sizeOfField: 6,
+                                        title: "Title",
+                                        name: "title",
+                                        type: "text",
+                                        placeholder: "Product title"
+                                    }
+                                }
+                            />
+                            <InputComponent
+                                formData={{
+                                    value: formData.price.value,
+                                    correct: formData.price.correct,
+                                    message: formData.price.message
+                                }}
+                                handleOnChange={handleOnChange}
+                                inputConfig={
+                                    {
+                                        sizeOfField: 3,
+                                        title: "Price",
+                                        name: "price",
+                                        type: "number",
+                                        placeholder: "0.00",
+                                        step:"0.01"
+                                    }
+                                }
+                            />
+                            <InputComponent
+                                formData={{
+                                    value: formData.sellerPhone.value,
+                                    correct: formData.sellerPhone.correct,
+                                    message: formData.sellerPhone.message
+                                }}
+                                handleOnChange={handleOnChange}
+                                inputConfig={
+                                    {
+                                        sizeOfField: 3,
+                                        title: "Seller Phone",
+                                        name: "sellerPhone",
+                                        type: "text",
+                                        placeholder: "+48 333 222 111",
+                                    }
+                                }
+                            />
                         </Row>
                         <Row className="mb-3">
-                            <Form.Group as={Col} md="6  " controlId="validationCustomUsername">
-                                <Form.Label>Image</Form.Label>
-                                <InputGroup hasValidation>
-                                    <Form.Control
-                                        type="text"
-                                        name="image"
-                                        placeholder="Image URL"
-                                        aria-describedby="inputGroupPrepend"
-                                        value={formData.image.value}
-                                        isInvalid={!formData.image.correct}
-                                        onChange={(e) => handleOnChange(e.currentTarget.value, e.currentTarget.name)}
-                                        required
-                                    />
-                                    <Form.Control.Feedback
-                                        type={formData.image.correct ? "valid" : "invalid"}>{formData.image.message}</Form.Control.Feedback>
-
-                                </InputGroup>
-                            </Form.Group>
+                            <InputComponent
+                                formData={{
+                                    value: formData.image.value,
+                                    correct: formData.image.correct,
+                                    message: formData.image.message
+                                }}
+                                handleOnChange={handleOnChange}
+                                inputConfig={
+                                    {
+                                        sizeOfField: 6,
+                                        title: "Image",
+                                        name: "image",
+                                        type: "text",
+                                        placeholder: "Image URL",
+                                    }
+                                }
+                            />
                             <Form.Group as={Col} md="3" controlId="validationCustom04">
                                 <Form.Label>Can by negotiate</Form.Label>
                                 <Form.Select
@@ -281,16 +289,19 @@ export default function Edit() {
                         <Row>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                                 <Form.Label>Description</Form.Label>
-                                <Form.Control required name="description" value={formData.description.value}
-                                              isInvalid={!formData.description.correct}
-                                              onChange={(e) => handleOnChange(e.currentTarget.value, e.currentTarget.name)}
-                                              as="textarea"
-                                              rows={3}/>
+                                <Form.Control
+                                    required
+                                    name="description"
+                                    value={formData.description.value}
+                                    isInvalid={!formData.description.correct}
+                                    onChange={(e) => handleOnChange(e.currentTarget.value, e.currentTarget.name)}
+                                    as="textarea"
+                                    rows={3}
+                                />
                                 <Form.Control.Feedback type={formData.description.correct ? "valid" : "invalid"}>
                                     {formData.description.message}
                                 </Form.Control.Feedback>
                             </Form.Group>
-
                         </Row>
                         {isAdvertError || isCategoryError ?
                             <Button disabled type="submit">Submit form</Button> :
@@ -303,7 +314,7 @@ export default function Edit() {
                                     item={{
                                         itemId: `${data.id}`,
                                         itemTitle: `${data.title}`,
-                                        infoTitle: "Edit",
+                                        infoTitle: "EditFormComponent",
                                         infoDescription: "Are you sure you want to edit"
                                     }}
                                 />
