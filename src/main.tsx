@@ -7,9 +7,10 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import axios from "axios";
 import AdvertsTable from "./adverts/AdvertsTable.tsx";
 import AdvertSide from "./adverts/advertSide/AdvertSide.tsx";
-import EditFormComponent from "./forms/editForm/EditFormComponent.tsx";
+import EditForm from "./forms/EditForm.tsx";
 import ErrorPage from "./components/ErrorPage.tsx";
 import Dashboard from "./dashboard/Dashboard.tsx";
+import AddForm from "./forms/AddForm.tsx";
 
 axios.defaults.baseURL = "http://127.0.0.1:3200";
 
@@ -27,12 +28,16 @@ const router = createBrowserRouter([
                 element: <AdvertsTable/>,
             },
             {
+                path: "/adverts/add",
+                element: <AddForm/>,
+            },
+            {
                 path: "/adverts/:advertId",
                 element: <AdvertSide/>,
             },
             {
                 path: "/adverts/:advertId/edit",
-                element: <EditFormComponent/>,
+                element: <EditForm/>,
             },
             {
                 path: "*",

@@ -15,6 +15,7 @@ interface InputComponentProps {
         type: string;
         placeholder: string;
         step?: string;
+        isError: boolean
     }
 }
 
@@ -27,9 +28,10 @@ const InputComponent: FC<InputComponentProps> = ({formData, handleOnChange, inpu
                 step={inputConfig.step}
                 name={inputConfig.name}
                 placeholder={inputConfig.placeholder}
-                value={formData.value}
+                value={inputConfig.isError ? "Error" : formData.value}
                 isInvalid={!formData.correct}
-                // readOnly={!formData.correct}
+                isValid={formData.correct}
+                disabled={inputConfig.isError}
                 onChange={(e) => handleOnChange(e.currentTarget.value, e.currentTarget.name)}
             />
             <Form.Control.Feedback

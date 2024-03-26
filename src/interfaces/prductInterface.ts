@@ -22,4 +22,18 @@ interface Product {
     [key: string]: string | boolean;
 }
 
-export type {Product, Pagination}
+interface NewProduct {
+    title: string;
+    price: string;
+    description: string;
+    seller: string;
+    image: string;
+    sellerPhone: string;
+    canNegotiate: boolean;
+    createdOn: string;
+    categoryId: string;
+
+    [key: string]: string | boolean;
+}
+
+export type {Product, Pagination, NewProduct}

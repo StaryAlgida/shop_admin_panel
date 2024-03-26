@@ -15,8 +15,9 @@ interface SelectComponentProps {
     handleOnChange: (value: string, name: string) => void;
     inputConfig: {
         sizeOfField: number;
-        title: string
+        title: string;
         name: string;
+        isError: boolean;
     }
     data: SelectData[];
 }
@@ -29,16 +30,20 @@ const SelectComponent: FC<SelectComponentProps> = ({formData, handleOnChange, in
                 name={inputConfig.name}
                 value={formData.value}
                 isInvalid={!formData.correct}
+                isValid={formData.correct}
+                disabled={inputConfig.isError}
                 onChange={(e) => handleOnChange(e.currentTarget.value, e.currentTarget.name)}
             >
-                {data.map((item) => (
-                    <option
-                        key={`select${inputConfig.name}${item}`}
-                        value={item.value}
-                    >
-                        {item.text}
-                    </option>
-                ))}
+                {inputConfig.isError ? <option>Error</option> :
+                    data.map((item) => (
+                        <option
+                            key={`select${inputConfig.name}${item.value}`}
+                            value={item.value}
+                        >
+                            {item.text}
+                        </option>
+                    ))
+                }
             </Form.Select>
             <Form.Control.Feedback
                 type={formData.correct ? "valid" : "invalid"}>{formData.message}</Form.Control.Feedback>

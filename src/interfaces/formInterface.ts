@@ -1,54 +1,20 @@
+interface FieldData{
+    value: string;
+    correct: boolean;
+    message: string;
+}
+
 interface FormState {
-    title: {
-        value: string;
-        correct: boolean;
-        message: string;
-    };
-    price: {
-        value: string;
-        correct: boolean;
-        message: string;
-    };
-    description: {
-        value: string;
-        correct: boolean;
-        message: string;
-    };
-    image: {
-        value: string;
-        correct: boolean;
-        message: string;
-    };
-    sellerPhone: {
-        value: string;
-        correct: boolean;
-        message: string;
-    };
-    canNegotiate: {
-        value: string;
-        correct: boolean;
-        message: string;
-    };
-    categoryId: {
-        value: string;
-        correct: boolean;
-        message: string;
-    };
-    id: {
-        value: string;
-        correct: boolean;
-        message: string;
-    };
-    seller: {
-        value: string;
-        correct: boolean;
-        message: string;
-    };
-    createdOn: {
-        value: string;
-        correct: boolean;
-        message: string;
-    };
+    title: FieldData;
+    price: FieldData;
+    description: FieldData;
+    image: FieldData;
+    sellerPhone: FieldData;
+    canNegotiate: FieldData;
+    categoryId: FieldData;
+    id: FieldData;
+    seller: FieldData;
+    createdOn: FieldData;
 
     [key: string]: {
         value: string;

@@ -34,6 +34,9 @@ export default function Header() {
                                     <CategoryElements data={categories}/>
                             }
                         </NavDropdown>
+                        <LinkContainer to={"/adverts/add"}>
+                            <Nav.Link>Add advert</Nav.Link>
+                        </LinkContainer>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
