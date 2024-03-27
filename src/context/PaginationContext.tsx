@@ -46,6 +46,7 @@ export const PaginationProvider = ({children}: { children: ReactNode }) => {
     })
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [categoryId, setCategoryId] = useState<string>('')
+
     const update = useCallback((data: Pagination) => {
         setPagesInfo({
             first: data.first,

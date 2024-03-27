@@ -1,25 +1,26 @@
 import {NavDropdown} from "react-bootstrap";
 import Category from "../interfaces/categoryInterface.ts";
-import {useContext} from "react";
-import {PaginationContext} from "../context/PaginationContext.tsx";
-import {LinkContainer} from "react-router-bootstrap";
+import {FC, useContext} from "react";
+import {ParamContext} from "../context/ParamContext.tsx";
 
-export default function CategoryElements({data}: { data: Category[] }) {
+interface CategoryElementsParams {
+    data: Category[],
+}
 
-    const {updateCategory, updateCurrentPage} = useContext(PaginationContext)
-    const update = (id:string)=>{
-        updateCategory(id)
-        updateCurrentPage(1)
-    }
+const CategoryElements: FC<CategoryElementsParams> = ({data}) => {
+    const {updateParams} = useContext(ParamContext)
     return (
         <>
             {data.map((category) => (
-                <LinkContainer key={category.id} to={`/${category.title.toLowerCase()}`}>
-                    <NavDropdown.Item onClick={() => update(category.id)}>
-                        {category.title}
-                    </NavDropdown.Item>
-                </LinkContainer>
+                <NavDropdown.Item
+                    key={category.id}
+                    onClick={() => updateParams("category", `${category.id}`)}
+                >
+                    {category.title}
+                </NavDropdown.Item>
             ))}
         </>
     )
 }
+
+export default CategoryElements

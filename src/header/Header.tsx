@@ -5,14 +5,21 @@ import CategoryElements from "./CategoryElements.tsx";
 import {useContext} from "react";
 import {PaginationContext} from "../context/PaginationContext.tsx";
 import {LinkContainer} from 'react-router-bootstrap'
+import {ParamContext} from "../context/ParamContext.tsx";
 
 export default function Header() {
     const [categories, isLoading, isError] = useCategory()
     const {updateCategory, updateCurrentPage} = useContext(PaginationContext)
+    const {updateParams} = useContext(ParamContext)
     const reset = () => {
         updateCategory('')
         updateCurrentPage(1)
+        updateParams('category', '')
+        updateParams('page', '1')
     }
+
+
+
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container>
