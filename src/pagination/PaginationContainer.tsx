@@ -2,25 +2,27 @@ import {Pagination} from "react-bootstrap";
 import {useContext} from "react";
 import {PaginationContext} from "../context/PaginationContext.tsx";
 import PaginationNumbers from "./PaginationNumbers.tsx";
+import {ParamContext} from "../context/ParamContext.tsx";
 
 export default function PaginationContainer() {
-    const {pagesInfo, currentPage, updateCurrentPage} = useContext(PaginationContext)
+    const {pagesCount, currentPage, changePageByOne} = useContext(PaginationContext)
+    const {updateParams} = useContext(ParamContext)
     return (
         <Pagination>
             <Pagination.First onClick={() => {
-                updateCurrentPage(1)
+                updateParams("page", "1")
             }}/>
             <Pagination.Prev onClick={() => {
-                updateCurrentPage(pagesInfo.prev === null ? pagesInfo.first : pagesInfo.prev)
+                changePageByOne(false)
             }}/>
 
-            <PaginationNumbers currentPage={currentPage} maxPage={pagesInfo.pages}/>
+            {/*<PaginationNumbers currentPage={currentPage} maxPage={pagesInfo.pages}/>*/}
 
             <Pagination.Next onClick={() => {
-                updateCurrentPage(pagesInfo.next === null ? pagesInfo.last : pagesInfo.next)
+                changePageByOne(true)
             }}/>
             <Pagination.Last onClick={() => {
-                updateCurrentPage(pagesInfo.last)
+                updateParams("page", `${pagesCount}`)
             }}/>
         </Pagination>
     );

@@ -1,77 +1,51 @@
-import {createContext, ReactNode, useCallback, useState} from "react";
-import {Pagination} from "../interfaces/prductInterface.ts";
-
-interface PageInfo {
-    first: number;
-    prev: number | null;
-    next: number | null;
-    last: number;
-    pages: number;
-}
+import {createContext, ReactNode, useContext, useState} from "react";
+import {ParamContext} from "./ParamContext.tsx";
 
 interface PaginationContextData {
-    update: (data: Pagination) => void;
-    updateCurrentPage: (pageNumber: number) => void;
-    updateCategory: (id: string) => void;
-    pagesInfo: PageInfo;
+    getPagesCount: (advertCount: number, maxAdvertsOnPage: number) => void;
+    pagesCount: number;
+    changePageByOne: (isNext: boolean) => void;
     currentPage: number;
-    categoryId: string;
 }
 
 export const PaginationContext = createContext<PaginationContextData>({
-    update: () => {
-    },
-    updateCurrentPage: () => {
-    },
-    updateCategory: () => {
-    },
-    pagesInfo: {
-        first: 0,
-        prev: null,
-        next: null,
-        last: 0,
-        pages: 0,
-    },
-    currentPage: 1,
-    categoryId: '',
+    getPagesCount: () => undefined,
+    pagesCount: 1,
+    changePageByOne: () => undefined,
+    currentPage: 0
 })
 
 export const PaginationProvider = ({children}: { children: ReactNode }) => {
-    const [pagesInfo, setPagesInfo] = useState<PageInfo>({
-        first: 0,
-        prev: null,
-        next: null,
-        last: 0,
-        pages: 0,
-    })
+    const [pagesCount, setPagesCount] = useState<number>(0)
     const [currentPage, setCurrentPage] = useState<number>(1)
-    const [categoryId, setCategoryId] = useState<string>('')
-
-    const update = useCallback((data: Pagination) => {
-        setPagesInfo({
-            first: data.first,
-            prev: data.prev,
-            next: data.next,
-            last: data.last,
-            pages: data.pages,
-        })
-    }, [])
-
-    const updateCurrentPage = (pageNumber: number) => {
-        setCurrentPage(pageNumber)
+    const {getParam, updateParams} = useContext(ParamContext)
+    const getPagesCount = (advertCount: number, maxAdvertsOnPage: number) => {
+        setPagesCount(Math.ceil(advertCount / maxAdvertsOnPage))
     }
 
-    const updateCategory = useCallback((id: string) => {
-        setCategoryId(id)
-    }, [])
+    // TODO: FIX BUG WITH PAGINATION
+    const changePageByOne = (isNext: boolean) => {
+        const page = getParam("page")
+        if (isNext) {
+            console.log(page)
+            if (page === null || page === "1") {
+                updateParams("page", "2")
+                console.log(isNext)
+            } else if (parseInt(page) + 1 > pagesCount) {
+                updateParams("page", `${parseInt(page) + 1}`)
+            }
 
+        } else {
+            if (page && parseInt(page) - 1 < 1) {
+                updateParams("page", `${parseInt(page) - 1}`)
+            }
+        }
+    }
     const contextData = {
-        update,
-        updateCurrentPage,
-        updateCategory,
-        pagesInfo,
+        getPagesCount,
+        pagesCount,
+        changePageByOne,
         currentPage,
-        categoryId,
     }
     return (
         <PaginationContext.Provider value={contextData}>

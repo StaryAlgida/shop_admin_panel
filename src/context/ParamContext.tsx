@@ -27,7 +27,7 @@ export const ParamProvider: FC<{ children: ReactNode }> = ({children}) => {
 
     const contextData: ParamContextData = {
         updateParams,
-        getParam
+        getParam,
     }
 
     return (

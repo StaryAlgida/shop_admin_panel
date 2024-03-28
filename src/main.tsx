@@ -11,6 +11,7 @@ import EditForm from "./forms/EditForm.tsx";
 import ErrorPage from "./components/ErrorPage.tsx";
 import Dashboard from "./dashboard/Dashboard.tsx";
 import AddForm from "./forms/AddForm.tsx";
+import {PaginationProvider} from "./context/PaginationContext.tsx";
 
 axios.defaults.baseURL = "http://127.0.0.1:3200";
 
@@ -25,7 +26,10 @@ const router = createBrowserRouter([
             },
             {
                 path: "/adverts",
-                element: <AdvertsTable/>,
+                element:
+                    <PaginationProvider>
+                        <AdvertsTable/>
+                    </PaginationProvider>,
             },
             {
                 path: "/adverts/add",

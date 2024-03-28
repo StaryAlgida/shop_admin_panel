@@ -4,6 +4,7 @@ import {Product} from "../interfaces/prductInterface.ts";
 import {useToaster} from "./useToaster.tsx";
 // import {PaginationContext} from "../context/PaginationContext.tsx";
 import {ParamContext} from "../context/ParamContext.tsx";
+import {PaginationContext} from "../context/PaginationContext.tsx";
 
 
 export default function useGetAllData(): [Product[] | undefined, boolean, boolean] {
@@ -11,22 +12,21 @@ export default function useGetAllData(): [Product[] | undefined, boolean, boolea
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState<boolean>(false)
     const {show} = useToaster()
-    // const {currentPage, categoryId, update} = useContext(PaginationContext)
     const {getParam} = useContext(ParamContext)
+    const {getPagesCount} = useContext(PaginationContext)
     useEffect(() => {
         const allOffers = async () => {
             try {
                 const page = getParam('page')
                 const categoryId = getParam('category')
-                console.log(page," ",categoryId)
+                // console.log(`${page} ${categoryId}`)
                 setLoading(true)
-                const response = await axios.get(`/adverts?_page=${page}&categoryId=${categoryId}`)
-                console.log(response)
+                const response = await axios.get(`/adverts?_page=${page || 1}&categoryId=${categoryId || ''}`)
+                getPagesCount(response.data.items, 10)
                 if (response.data.data.length === 0) {
                     show({title: "No data", description: "Can't find data", bg: "danger"})
                 } else {
                     setData([...response.data.data])
-                    // update(response.data)
                 }
             } catch (error) {
                 if (axios.isAxiosError(error)) {
@@ -38,7 +38,7 @@ export default function useGetAllData(): [Product[] | undefined, boolean, boolea
             }
         }
         void allOffers()
-    }, [show, getParam]);
+    }, [show, getParam, getPagesCount]);
 
     return [data, loading, error]
 }
