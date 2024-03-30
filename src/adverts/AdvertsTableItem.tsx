@@ -1,16 +1,18 @@
 import {Product} from "../interfaces/prductInterface.ts";
 import Category from "../interfaces/categoryInterface.ts";
 import {LinkContainer} from "react-router-bootstrap";
+import {FC} from "react";
 
-export default function AdvertsTableItem({data, categories}: {
+interface AdvertsTableItemProps {
     data: Product,
     categories: Category[],
-}) {
+}
+
+const AdvertsTableItem: FC<AdvertsTableItemProps> = ({data, categories}) => {
     const formatData = (date: string): string => {
         const inputDate = new Date(date)
         return inputDate.toTimeString().slice(0, 8) + " " + inputDate.toISOString().slice(0, 10);
     }
-
     return (
         <LinkContainer to={`/adverts/${data.id}`}>
             <tr className={data.id ? "cursor-pointer" : "cursor-not-allowed"}>
@@ -24,3 +26,4 @@ export default function AdvertsTableItem({data, categories}: {
         </LinkContainer>
     )
 }
+export default AdvertsTableItem

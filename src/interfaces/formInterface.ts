@@ -16,11 +16,7 @@ interface FormState {
     seller: FieldData;
     createdOn: FieldData;
 
-    [key: string]: {
-        value: string;
-        correct: boolean;
-        message: string;
-    };
+    [key: string]: FieldData;
 }
 
 export const defaultData: FormState = {

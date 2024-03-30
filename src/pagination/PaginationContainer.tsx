@@ -5,24 +5,20 @@ import PaginationNumbers from "./PaginationNumbers.tsx";
 import {ParamContext} from "../context/ParamContext.tsx";
 
 export default function PaginationContainer() {
-    const {pagesCount, currentPage, changePageByOne} = useContext(PaginationContext)
-    const {updateParams} = useContext(ParamContext)
+    const {pagesCount, pageNext, pagePrev} = useContext(PaginationContext)
+    const {updatePage} = useContext(ParamContext)
     return (
         <Pagination>
             <Pagination.First onClick={() => {
-                updateParams("page", "1")
-            }}/>
-            <Pagination.Prev onClick={() => {
-                changePageByOne(false)
+                updatePage("1")
             }}/>
 
-            {/*<PaginationNumbers currentPage={currentPage} maxPage={pagesInfo.pages}/>*/}
+            <Pagination.Prev onClick={pagePrev}/>
+            <PaginationNumbers/>
+            <Pagination.Next onClick={pageNext}/>
 
-            <Pagination.Next onClick={() => {
-                changePageByOne(true)
-            }}/>
             <Pagination.Last onClick={() => {
-                updateParams("page", `${pagesCount}`)
+                updatePage(`${pagesCount}`)
             }}/>
         </Pagination>
     );

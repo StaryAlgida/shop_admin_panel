@@ -6,6 +6,7 @@ import CategoryCount from "../interfaces/categoryCountInterface.ts";
 
 export default function useCategoryCount(): [CategoryCount[], boolean, boolean] {
     const [data, setData] = useState<CategoryCount[]>([{
+        id: '',
         categoryId: "-1",
         count: 0
     }])
@@ -30,7 +31,7 @@ export default function useCategoryCount(): [CategoryCount[], boolean, boolean] 
             }
         }
         void countCategories()
-    }, []);
+    }, [show]);
 
     return [data, loading, error]
 }

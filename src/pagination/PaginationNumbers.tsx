@@ -1,26 +1,50 @@
 import {useContext, useEffect, useState} from "react";
 import {Pagination} from "react-bootstrap";
 import {PaginationContext} from "../context/PaginationContext.tsx";
+import {ParamContext} from "../context/ParamContext.tsx";
 
-export default function PaginationNumbers({currentPage, maxPage}: { currentPage: number, maxPage: number }) {
+export default function PaginationNumbers() {
 
     const [pages, setPages] = useState<number[]>([])
-    const {updateCurrentPage} = useContext(PaginationContext)
+    const {pagesCount} = useContext(PaginationContext)
+    const {getPage, updatePage} = useContext(ParamContext)
 
     useEffect(() => {
-        setPages([...Array(maxPage).keys()].map(x => x + 1))
-    }, [maxPage]);
+        setPages([...Array(pagesCount).keys()].map(x => x + 1))
+    }, [pagesCount]);
+
+    const checkPages = (page: number): boolean => {
+        const currentPage = getPage()
+        if (currentPage === null || currentPage === '' && page === 1) {
+            return true
+        }
+        if (page === pagesCount && parseInt(currentPage) > pagesCount) {
+            return true
+        }
+        return parseInt(currentPage) === page;
+
+    }
 
     return (
         <>
             {pages.map(page => {
-                if (currentPage === page) {
+                if (checkPages(page)) {
                     return (
-                        <Pagination.Item onClick={() => updateCurrentPage(page)} active key={page}>{page}</Pagination.Item>
+                        <Pagination.Item
+                            onClick={() => console.log(page)} active
+                            key={page}
+                        >
+                            {page}
+                        </Pagination.Item>
                     )
                 } else {
                     return (
-                        <Pagination.Item onClick={() => updateCurrentPage(page)} key={page}>{page}</Pagination.Item>
+                        <Pagination.Item
+                            onClick={() => updatePage(`${page}`)}
+                            key={page}
+                        >
+                            {page}
+                        </Pagination.Item>
                     )
                 }
 

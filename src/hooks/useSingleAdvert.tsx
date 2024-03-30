@@ -6,16 +6,16 @@ import {useToaster} from "./useToaster.tsx";
 export default function useSingleAdvert(advertId: string | undefined):[Product, boolean, boolean] {
     const {show} = useToaster()
     const [data, setData] = useState<Product>({
-        id: null,
-        title: null,
+        id: '',
+        title: '',
         price: '0',
-        description: null,
-        seller: null,
-        image: null,
-        sellerPhone: null,
-        canNegotiate: null,
-        createdOn: null,
-        categoryId: null,
+        description: '',
+        seller: '',
+        image: '',
+        sellerPhone: '',
+        canNegotiate: false,
+        createdOn: '',
+        categoryId: '',
     })
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<boolean>(false)

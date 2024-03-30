@@ -22,15 +22,15 @@ export default function AdvertSide() {
 
     const [showModal, setShowModal] = useState(false);
 
-    const handleCloseModal = () => setShowModal(false)
-    const handleOpenModal = () => setShowModal(true)
+    const handleCloseDeleteModal = () => setShowModal(false)
+    const handleOpenDeleteModal = () => setShowModal(true)
 
     const handleDelete = async (id: string) => {
         try {
             const response = await axios.delete(`/adverts/${id}`)
             console.log(response)
             show({title: `Success`, description: `Item with id ${id} deleted successfully!`, bg: "success"})
-            handleCloseModal()
+            handleCloseDeleteModal()
             nav('/')
         } catch (error) {
             if (axios.isAxiosError(error)) {
@@ -49,7 +49,7 @@ export default function AdvertSide() {
                         <Row className="mb-3">
                             <ModalComponent
                                 showModal={showModal}
-                                handleCloseModal={handleCloseModal}
+                                handleCloseModal={handleCloseDeleteModal}
                                 handleAction={handleDelete}
                                 item={{
                                     itemId: data.id,
@@ -62,7 +62,7 @@ export default function AdvertSide() {
                                 <LinkContainer to={`/adverts/${advertId}/edit`}>
                                     <Button variant="success" className="me-2">Edit</Button>
                                 </LinkContainer>
-                                <Button variant="danger" onClick={handleOpenModal}>Delete</Button>
+                                <Button variant="danger" onClick={handleOpenDeleteModal}>Delete</Button>
                             </Col>
                         </Row>
                         : ''}
