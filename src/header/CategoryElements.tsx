@@ -9,13 +9,12 @@ interface CategoryElementsParams {
 }
 
 const CategoryElements: FC<CategoryElementsParams> = ({data}) => {
-    const {updateCategory, updatePage} = useContext(ParamContext)
+    const {updateCategory} = useContext(ParamContext)
 
     const navigate = useNavigate();
 
     const handleCategoryClick = (category: Category) => {
         navigate('/adverts');
-        updatePage('1');
         updateCategory(category.id);
     };
 

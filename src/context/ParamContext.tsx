@@ -22,9 +22,12 @@ export const ParamProvider: FC<{ children: ReactNode }> = ({children}) => {
     const updateCategory = (value: string) => {
         setCategoryParam(prev => {
             prev.set('category', value)
+            prev.set('page', '1')
             return prev
         })
     }
+
+
     const getCategory = () => {
         return categoryParam.get('category') || ''
     }

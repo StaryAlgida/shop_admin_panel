@@ -3,7 +3,7 @@ import {Product} from "../interfaces/prductInterface.ts";
 import axios from "axios";
 import {useToaster} from "./useToaster.tsx";
 
-export default function useSingleAdvert(advertId: string | undefined):[Product, boolean, boolean] {
+export default function useSingleAdvert(advertId: string | undefined):[Product, boolean, boolean, string] {
     const {show} = useToaster()
     const [data, setData] = useState<Product>({
         id: '',
@@ -19,6 +19,7 @@ export default function useSingleAdvert(advertId: string | undefined):[Product, 
     })
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<boolean>(false)
+    const [errorMessage, setErrorMessage] = useState<string>('')
 
     useEffect(() => {
         const getData = async () => {
@@ -29,12 +30,14 @@ export default function useSingleAdvert(advertId: string | undefined):[Product, 
                     setData({...response.data[0]})
                 } else {
                     setError(true)
+                    setErrorMessage(`Advert not found.`)
                     show({title: "404", description: `Advert with id:${advertId} not found.`, bg: "danger"})
                 }
 
             } catch (error) {
                 if (axios.isAxiosError(error)) {
                     console.log(error)
+                    setErrorMessage(`${error.message}`)
                     show({title: error.code, description: error.message, bg: "danger"})
                     setError(true)
                 }
@@ -44,5 +47,5 @@ export default function useSingleAdvert(advertId: string | undefined):[Product, 
         }
         void getData()
     }, [advertId, show]);
-    return [data, loading, error]
+    return [data, loading, error, errorMessage]
 }

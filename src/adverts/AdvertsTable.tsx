@@ -5,7 +5,7 @@ import useCategory from "../hooks/useCategory.tsx";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useContext, useEffect} from "react";
 import {useToaster} from "../hooks/useToaster.tsx";
-import AdvertsLoadingError from "./advertsLoadingError/AdvertsLoadingError.tsx";
+import AdvertsLoadingError from "./advertsTableLoadingError/AdvertsLoadingError.tsx";
 import PaginationContainer from "../pagination/PaginationContainer.tsx";
 import {ParamContext} from "../context/ParamContext.tsx";
 
@@ -36,8 +36,8 @@ export default function AdvertsTable() {
 
     useEffect(() => {
         const checkPage = () => {
-            const currentPage = parseInt(getPage())
-            if (currentPage < 1 || isNaN(currentPage)) {
+            const currentPage = getPage()
+            if (parseInt(currentPage) < 1 || isNaN(Number(currentPage))) {
                 updatePage('1')
             }
         }

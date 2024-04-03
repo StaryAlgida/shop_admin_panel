@@ -1,12 +1,18 @@
 import {LinkContainer} from "react-router-bootstrap";
 import {Button} from "react-bootstrap";
+import {FC} from "react";
 
-export default function ErrorPage(){
+interface ErrorPageParams {
+    errorText?: string;
+    status?: string | number;
+}
 
-    return(
+const ErrorPage: FC<ErrorPageParams> = ({errorText = "not found", status = 404}) => {
+
+    return (
         <div className='d-flex flex-column justify-content-center align-items-center mt-5'>
             <h1>Oops!</h1>
-            <h3>404 not found</h3>
+            <h3>{status} {errorText}</h3>
             <p>
                 <LinkContainer to='/'>
                     <Button>Go back</Button>
@@ -15,3 +21,5 @@ export default function ErrorPage(){
         </div>
     )
 }
+
+export default ErrorPage

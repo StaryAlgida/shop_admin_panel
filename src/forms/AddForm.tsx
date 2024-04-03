@@ -63,20 +63,20 @@ export default function AddForm() {
     }
 
     const handleAdd = async () => {
-        try{
+        try {
             const response = await axios.post('/adverts', dataToSend)
-            if (response.status === 200 || response.status === 201){
+            if (response.status === 200 || response.status === 201) {
                 show({
                     title: "Success",
                     description: `Product ${formData.title.value} created successfully`,
                     bg: "success"
                 })
             }
-        }catch (error){
+        } catch (error) {
             if (axios.isAxiosError(error)) {
                 show({title: `${error.status}`, description: error.message, bg: "danger"})
             }
-        }finally {
+        } finally {
             handleCloseModal()
         }
 

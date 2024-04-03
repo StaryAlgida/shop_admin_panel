@@ -1,12 +1,15 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {ReactNode, useState} from "react";
 import axios from "axios";
 import {useToaster} from "../../hooks/useToaster.tsx";
-import {Button, Col, Container, OverlayTrigger, Row, Tooltip} from "react-bootstrap";
+import {Button, Col, Container, Image, OverlayTrigger, Row, Tooltip} from "react-bootstrap";
 import AdvertCarousel from "./components/AdvertCarousel.tsx";
 import ModalComponent from "../../components/ModalComponent.tsx";
 import useSingleAdvert from "../../hooks/useSingleAdvert.tsx";
 import {LinkContainer} from "react-router-bootstrap";
+import canNegotiated from "/canNegotiated.svg"
+import noNegotiated from "/noNegotiated.svg"
+import ErrorPage from "../../components/ErrorPage.tsx";
 
 
 const Link = ({id, children, title}: { id: string, children: ReactNode, title: string }) => (
@@ -17,7 +20,6 @@ const Link = ({id, children, title}: { id: string, children: ReactNode, title: s
 
 export default function AdvertSide() {
     const {show} = useToaster()
-    const nav = useNavigate()
     const {advertId} = useParams()
 
     const [showModal, setShowModal] = useState(false);
@@ -31,7 +33,7 @@ export default function AdvertSide() {
             console.log(response)
             show({title: `Success`, description: `Item with id ${id} deleted successfully!`, bg: "success"})
             handleCloseDeleteModal()
-            nav('/')
+            window.history.back()
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 show({title: `Error ${error.code}`, description: error.message, bg: "danger"})
@@ -39,11 +41,12 @@ export default function AdvertSide() {
         }
     }
 
-    const [data, isLoading] = useSingleAdvert(advertId)
+    const [data, isLoading, isError, errorMessage] = useSingleAdvert(advertId)
 
     return (
         <>
             {isLoading ? "Loading" :
+                isError ? <ErrorPage status={''} errorText={errorMessage}/> :
                 <Container className='mt-2'>
                     {data.title && data.id ?
                         <Row className="mb-3">
@@ -76,18 +79,10 @@ export default function AdvertSide() {
                                 <h3 className='text-secondary'>{data.price} PLN</h3>
                                 <span className='ms-3 mt-1'>{data.canNegotiate ?
                                     <Link title='Can be negotiated' id='t-1'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                             fill="currentColor" className="negotiation-svg-true " viewBox="0 0 16 16">
-                                            <path
-                                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                                        </svg>
+                                        <Image src={canNegotiated}/>
                                     </Link> :
                                     <Link title='Cannot be negotiated' id='t-2'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                             fill="currentColor" className="negotiation-svg-false" viewBox="0 0 16 16">
-                                            <path
-                                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
-                                        </svg>
+                                    <Image src={noNegotiated}/>
                                     </Link>}
                             </span>
                             </div>
