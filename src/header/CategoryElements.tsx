@@ -5,33 +5,38 @@ import {ParamContext} from "../context/ParamContext.tsx";
 import {useNavigate} from "react-router-dom";
 
 interface CategoryElementsParams {
-    data: Category[],
+  data: Category[],
 }
 
 const CategoryElements: FC<CategoryElementsParams> = ({data}) => {
-    const {updateCategory} = useContext(ParamContext)
+  const {setCategory} = useContext(ParamContext)
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleCategoryClick = (category: Category) => {
-        navigate('/adverts');
-        updateCategory(category.id);
-    };
+  const handleCategoryClick = (category: Category) => {
+    navigate('/adverts');
+    setCategory(category.id);
+  };
 
-    return (
-        <>
-            {data.map((category) => (
-                <NavDropdown.Item
-                    key={category.id}
-                    onClick={() => {
-                        handleCategoryClick(category)
-                    }}
-                >
-                    {category.title}
-                </NavDropdown.Item>
-            ))}
-        </>
-    )
+  return (
+      <>
+        {!data.length &&
+            <NavDropdown.Item disabled>
+                No data
+            </NavDropdown.Item>
+        }
+        {data?.map((category) => (
+            <NavDropdown.Item
+                key={category.id}
+                onClick={() => {
+                  handleCategoryClick(category)
+                }}
+            >
+              {category.title}
+            </NavDropdown.Item>
+        ))}
+      </>
+  )
 }
 
 export default CategoryElements

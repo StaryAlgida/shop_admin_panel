@@ -552,14 +552,14 @@
     },
     {
       "id": "42",
-      "title": "Chic Ceramic Vase",
+      "title": "Chic Ceramic Vaseaaaa",
       "price": "29.99",
       "description": "Minimalist ceramic vase in neutral tones, perfect for showcasing flowers",
       "seller": "Liam",
       "image": "http://placeimg.com/400/400/business?i=42",
       "sellerPhone": "+48 906 383 538",
-      "canNegotiate": true,
-      "createdOn": "2024-03-30T18:00:50.432Z",
+      "canNegotiate": "true",
+      "createdOn": "2024-04-10T20:24:29.329Z",
       "categoryId": "1"
     },
     {
@@ -589,14 +589,14 @@
     {
       "id": "45",
       "title": "Stylish Canvas Backpack edit",
-      "price": "69.99",
-      "description": "Durable canvas backpack with multiple pockets, perfect for everyday use/edit",
+      "price": "70.29",
+      "description": "Durable canvas backpack with multiple pockets, perfect edit",
       "seller": "Evelyn",
       "image": "http://placeimg.com/400/400/business?i=45/edit",
-      "sellerPhone": "+48 906 383 522",
-      "canNegotiate": false,
-      "createdOn": "2024-03-26T15:41:15.920Z",
-      "categoryId": "6"
+      "sellerPhone": "+48 906 383 533",
+      "canNegotiate": "false",
+      "createdOn": "2024-04-10T20:28:02.657Z",
+      "categoryId": "2"
     },
     {
       "id": "46",
@@ -660,27 +660,39 @@
     },
     {
       "id": "51",
-      "title": "ggggg",
-      "price": "232",
-      "description": "Set of four crystal wine glasses, perfect for entertaining guestsawdawd edit edit",
+      "title": "aadawefrrgt",
+      "price": "232.1",
+      "description": "Set of four crystal wine glasses, perfect for entertaining guestsawdawd edit editfdfd",
       "seller": "Elizabeth",
-      "image": "http://placeimg.com/400/400/business?i=50",
+      "image": "http://placeimg.com/400/400/business?i=50dfgfgfdg",
       "sellerPhone": "+48 906 383 667",
-      "canNegotiate": true,
+      "canNegotiate": "true",
       "createdOn": "2024-03-26T16:44:25.178Z",
-      "categoryId": "1"
+      "categoryId": "0"
     },
     {
-      "id": "f5b6",
-      "title": "ghawd",
-      "price": "23",
-      "description": "aawfafafasgagagga",
-      "seller": "aadwadd",
-      "image": "fgfgh",
+      "id": "09df",
+      "title": "awdawdawd",
+      "price": "0.1",
+      "description": "wdwdawawdawda",
+      "image": "awdawdawd",
       "sellerPhone": "+48 222 333 222",
-      "canNegotiate": true,
-      "createdOn": "2024-03-26T18:09:45.601Z",
-      "categoryId": "4"
+      "canNegotiate": "false",
+      "categoryId": "3",
+      "seller": "wdadawdawda",
+      "createdOn": "2024-04-10T20:23:17.125Z"
+    },
+    {
+      "id": "b7ee",
+      "title": "awdawdwadawdawd",
+      "price": "20.2",
+      "description": "wadawdawdawd",
+      "image": "awdawawdawawd",
+      "sellerPhone": "+48 222 333 222",
+      "canNegotiate": "false",
+      "categoryId": "1",
+      "seller": "wawaawdawd",
+      "createdOn": "2024-04-10T20:24:14.190Z"
     }
   ],
   "stats": [

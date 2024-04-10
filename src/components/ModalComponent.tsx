@@ -31,7 +31,10 @@ const ModalComponent: FC<ModalComponentProps> = ({showModal, handleCloseModal, h
                 <Button variant="danger" onClick={handleCloseModal}>
                     No
                 </Button>
-                <Button variant="success" onClick={() => handleAction(item.itemId)}>Yes</Button>
+                <Button variant="success" onClick={() => {
+                    handleAction(item.itemId)
+                    handleCloseModal()
+                }}>Yes</Button>
             </Modal.Footer>
         </Modal>
     );

@@ -11,47 +11,50 @@ import EditForm from "./forms/EditForm.tsx";
 import ErrorPage from "./components/ErrorPage.tsx";
 import Dashboard from "./dashboard/Dashboard.tsx";
 import AddForm from "./forms/AddForm.tsx";
-import {PaginationProvider} from "./context/PaginationContext.tsx";
+import {FormProvider} from "./context/FormContext.tsx";
 
 axios.defaults.baseURL = "http://127.0.0.1:3200";
 
 const router = createBrowserRouter([
-    {
+  {
+    path: "/",
+    element: <App/>,
+    children: [
+      {
         path: "/",
-        element: <App/>,
-        children: [
-            {
-                path: "/",
-                element: <Dashboard/>,
-            },
-            {
-                path: "/adverts",
-                element:
-                    <PaginationProvider>
-                        <AdvertsTable/>
-                    </PaginationProvider>,
-            },
-            {
-                path: "/adverts/add",
-                element: <AddForm/>,
-            },
-            {
-                path: "/adverts/:advertId",
-                element: <AdvertSide/>,
-            },
-            {
-                path: "/adverts/:advertId/edit",
-                element: <EditForm/>,
-            },
-            {
-                path: "*",
-                element: <ErrorPage/>
-            }
-        ]
-    }])
+        element: <Dashboard/>,
+      },
+      {
+        path: "/adverts",
+        element: <AdvertsTable/>
+      },
+      {
+        path: "/adverts/add",
+        element:
+            <FormProvider>
+              <AddForm/>
+            </FormProvider>,
+      },
+      {
+        path: "/adverts/:advertId",
+        element: <AdvertSide/>,
+      },
+      {
+        path: "/adverts/:advertId/edit",
+        element:
+            <FormProvider>
+              <EditForm/>
+            </FormProvider>,
+      },
+      {
+        path: "*",
+        element: <ErrorPage/>
+      }
+    ]
+  }])
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <RouterProvider router={router}/>
+      <RouterProvider router={router}/>
     </React.StrictMode>
 )

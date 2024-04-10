@@ -1,12 +1,14 @@
-import FormState from "../../interfaces/formInterface.ts";
+import {FormError} from "../../interfaces/formInterface.ts";
 
-const checkData = (formData: FormState): boolean => {
-    for (const key in formData) {
-        if (!formData[key].correct) {
-            return false
-        }
+const checkIfError = (error: FormError): boolean => {
+  for (const key in error) {
+
+    if (error[key] !== null) {
+      console.log(key)
+      return true
     }
-    return true
+  }
+  return false
 }
 
-export default checkData
+export default checkIfError

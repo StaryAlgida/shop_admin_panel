@@ -1,25 +1,33 @@
 import {Pagination} from "react-bootstrap";
-import {useContext} from "react";
-import {PaginationContext} from "../context/PaginationContext.tsx";
 import PaginationNumbers from "./PaginationNumbers.tsx";
-import {ParamContext} from "../context/ParamContext.tsx";
+import {useAdvertTableContext} from "../hooks/useAdvertTableContext.tsx";
+import useAdvertsTablePagination from "../hooks/useAdvertsTablePagination.tsx";
 
-export default function PaginationContainer() {
-    const {pagesCount, pageNext, pagePrev} = useContext(PaginationContext)
-    const {updatePage} = useContext(ParamContext)
-    return (
-        <Pagination>
-            <Pagination.First onClick={() => {
-                updatePage("1")
-            }}/>
+const MAX_ADVERTS_ON_PAGE = 10
 
-            <Pagination.Prev onClick={pagePrev}/>
-            <PaginationNumbers/>
-            <Pagination.Next onClick={pageNext}/>
+export default function PaginationContainer({totalCount}:{totalCount:number}) {
+  const getPagesCount = (advertsCount: number, maxAdvertsOnPage: number) => {
+    return Math.ceil(advertsCount / maxAdvertsOnPage)
+  }
 
-            <Pagination.Last onClick={() => {
-                updatePage(`${pagesCount}`)
-            }}/>
-        </Pagination>
-    );
+  const pagesCount = getPagesCount(totalCount, MAX_ADVERTS_ON_PAGE)
+
+  const {pageNext, pagePrev} = useAdvertsTablePagination(pagesCount)
+  const {setPage} = useAdvertTableContext()
+
+  return (
+      <Pagination>
+        <Pagination.First onClick={() => {
+          setPage("1")
+        }}/>
+
+        <Pagination.Prev onClick={pagePrev}/>
+        <PaginationNumbers pagesCount={pagesCount}/>
+        <Pagination.Next onClick={pageNext}/>
+
+        <Pagination.Last onClick={() => {
+          setPage(`${pagesCount}`)
+        }}/>
+      </Pagination>
+  );
 }

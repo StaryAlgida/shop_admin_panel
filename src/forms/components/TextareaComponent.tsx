@@ -1,44 +1,46 @@
 import {Col, Form} from "react-bootstrap";
-import {FC} from "react";
+import {FC, useContext} from "react";
+import {FormValuesContext} from "../../context/FormContext.tsx";
 
-interface InputComponentProps {
-    formData: {
-        value: string;
-        correct: boolean;
-        message: string;
-    }
-    handleOnChange: (value: string, name: string) => void;
-    inputConfig: {
-        sizeOfField?: number;
-        title: string;
-        name: string;
-        placeholder: string;
-        rows: number;
-        isError: boolean;
-    }
+interface TextComponentProps {
+  sizeAndLabel: {
+    label: string
+    fieldSize: number;
+  }
+  basicConfiguration: {
+    name: string;
+    placeholder?: string;
+    rows?: number;
+  }
+  value: string;
+  touched: boolean;
+  error: null | string
+
 }
 
-const TextareaComponent: FC<InputComponentProps> = ({formData, handleOnChange, inputConfig}) => {
-    return (
-        <Form.Group as={Col} className="mb-3" md={`${inputConfig.sizeOfField}`}
-                    controlId={`textarea${inputConfig.name}`}>
-            <Form.Label>{inputConfig.title}</Form.Label>
-            <Form.Control
-                name={inputConfig.name}
-                value={inputConfig.isError ? "Error" : formData.value}
-                isInvalid={!formData.correct}
-                isValid={formData.correct}
-                placeholder={inputConfig.placeholder}
-                disabled={inputConfig.isError}
-                onChange={(e) => handleOnChange(e.currentTarget.value, e.currentTarget.name)}
-                as="textarea"
-                rows={inputConfig.rows}
-            />
-            <Form.Control.Feedback type={formData.correct ? "valid" : "invalid"}>
-                {formData.message}
-            </Form.Control.Feedback>
-        </Form.Group>
-    )
+const TextareaComponent: FC<TextComponentProps> = (props) => {
+  const {sizeAndLabel, basicConfiguration, value, touched, error} = props
+  const {handleChange} = useContext(FormValuesContext)
+  return (
+      <Form.Group
+          as={Col}
+          className="mb-3" md={`${sizeAndLabel.fieldSize}`}
+          controlId={`textarea${basicConfiguration.name}`}
+      >
+        <Form.Label>{sizeAndLabel.label}</Form.Label>
+        <Form.Control
+            {...basicConfiguration}
+            value={value}
+            isInvalid={!!error && touched}
+            isValid={!error && touched}
+            onChange={handleChange}
+            as="textarea"
+        />
+        <Form.Control.Feedback type={!error ? "valid" : "invalid"}>
+          {error}
+        </Form.Control.Feedback>
+      </Form.Group>
+  )
 }
 
 export default TextareaComponent

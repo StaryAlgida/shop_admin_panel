@@ -1,37 +1,34 @@
 import {useEffect, useState} from "react";
 import {useToaster} from "./useToaster.tsx";
 import axios from "axios";
-import CategoryCount from "../interfaces/categoryCountInterface.ts";
 
+interface CategoryCountResponse {
+  id: string;
+  categoryId: string;
+  count: number;
+}
 
-export default function useCategoryCount(): [CategoryCount[], boolean, boolean] {
-    const [data, setData] = useState<CategoryCount[]>([{
-        id: '',
-        categoryId: "-1",
-        count: 0
-    }])
-    const [loading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState<boolean>(false)
-    const {show} = useToaster()
+export default function useCategoryCount() {
+  const [categoryCountData, setCategoryCountData] = useState<CategoryCountResponse[]>()
+  const [isCategoryCountLoading, setIsCategoryCountLoading] = useState<boolean>(false)
+  const {show} = useToaster()
 
-    useEffect(() => {
-        const countCategories = async () => {
-            try {
-                setLoading(true)
-                const response = await axios.get('/stats')
-                setData([...response.data])
-                setLoading(false)
-            } catch (error) {
-                if (axios.isAxiosError(error)) {
-                    show({title: error.code, description: error.message, bg: "danger"})
-                    setError(true)
-                }
-            } finally {
-                setLoading(false)
-            }
+  useEffect(() => {
+    const countCategories = async () => {
+      try {
+        setIsCategoryCountLoading(true)
+        const {data} = await axios.get<CategoryCountResponse[]>('/stats')
+        setCategoryCountData(data)
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          show({title: error.code, description: error.message, bg: "danger"})
         }
-        void countCategories()
-    }, [show]);
+      } finally {
+        setIsCategoryCountLoading(false)
+      }
+    }
+    void countCategories()
+  }, [show]);
 
-    return [data, loading, error]
+  return {categoryCountData, isCategoryCountLoading}
 }
