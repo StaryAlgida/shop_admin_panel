@@ -8,7 +8,6 @@ import PaginationContainer from "../pagination/PaginationContainer.tsx";
 export default function AdvertsTable() {
   const {data, totalCount, loading} = useGetAllData()
   const {categoryData} = useCategory()
-
   return (
       <>
         <Table striped bordered hover>
@@ -23,7 +22,7 @@ export default function AdvertsTable() {
           </tr>
           </thead>
           <tbody>
-          <AdvertsLoadingError isLoading={loading} isEmpty={!totalCount}/>
+          <AdvertsLoadingError isLoading={loading} isError={!totalCount}/>
           {data?.map(item => (
               (<AdvertsTableItem key={item.id} data={item} categories={categoryData}/>)
           ))}

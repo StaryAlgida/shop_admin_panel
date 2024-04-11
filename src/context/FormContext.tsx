@@ -42,7 +42,7 @@ export const FormProvider: FC<{ children: ReactNode }> = ({children}) => {
       data.createdOn = new Date().toISOString()
       delete data.id
       const response = await axios({method, url, data})
-      show({title: `Item updated status: ${response.status}`, description: "Item updated successfully", bg: "success"})
+      show({title: `Success status: ${response.status}`, description: "Operation was successful", bg: "success"})
     } catch (error) {
       if (axios.isAxiosError(error)) {
         show({title: error.code, description: error.message, bg: "danger"})

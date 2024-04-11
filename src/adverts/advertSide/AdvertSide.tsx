@@ -30,8 +30,8 @@ export default function AdvertSide() {
   const handleDelete = async (id: string) => {
     try {
       const response = await axios.delete(`/adverts/${id}`)
-      console.log(response)
-      show({title: `Success`, description: `Item with id ${id} deleted successfully!`, bg: "success"})
+      // console.log(response)
+      show({title: `Success ${response.status}`, description: `Item with id ${id} deleted successfully!`, bg: "success"})
       handleCloseDeleteModal()
       window.history.back()
     } catch (error) {

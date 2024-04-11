@@ -1,16 +1,25 @@
-import {StatesProps} from "../../interfaces/dashboardPropsInterfaces.ts";
 import {FC} from "react";
 import {Spinner} from "react-bootstrap";
 
+interface StatesProps {
+  isLoading: boolean;
+  isError: boolean;
+}
+
 const AdvertsLoadingError: FC<StatesProps> = ({isLoading = false, isError = false}) => {
-    return (
-        <tr>
-            <td colSpan={6} className="text-center">
-                {isLoading && <Spinner animation="border"/>}
-                {isError && "No data"}
-            </td>
-        </tr>
-    )
+  return (
+      <>
+        {
+          isLoading || isError ?
+              <tr>
+                <td colSpan={6} className="text-center">
+                  {isLoading && <Spinner animation="border"/>}
+                  {isError && !isLoading && "No data"}
+                </td>
+              </tr> : ''
+        }</>
+
+  )
 }
 
 export default AdvertsLoadingError
